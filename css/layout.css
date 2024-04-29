@@ -1,0 +1,27 @@
+body {
+  margin: 5rem;
+}
+
+.container {
+  max-width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column-full,
+.column-half {
+  width: 100%;
+}
+
+@media screen and (width >= 768px) {
+  .container {
+    max-width: 100%;
+  }
+
+  .column-half {
+    width: 50%;
+  }
+}
