@@ -2,6 +2,7 @@
 let $monsterSearchBar = document.querySelector('.monster-search-bar');
 let $monsterSearchButton = document.querySelector('.monster-search-button');
 let $view = document.querySelectorAll('.view');
+let $homeButton = document.querySelector('.home-button');
 const domQueries = {
     $monsterSearchBar,
     $monsterSearchButton,
@@ -16,6 +17,9 @@ for (const key in domQueries) {
 // $monsterSearchBar?.append($icon);
 $monsterSearchButton?.addEventListener('click', () => {
     viewSwap('monster-view');
+});
+$homeButton?.addEventListener('click', () => {
+    viewSwap('home-view');
 });
 function viewSwap(string) {
     for (let i = 0; i < $view.length; i++) {

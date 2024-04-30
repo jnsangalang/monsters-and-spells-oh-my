@@ -16,7 +16,7 @@
   <body>
     <header></header>
     <main>
-      <div data-view="main-view" class="view">
+      <div data-view="home-view" class="view">
         <div class="container"></div>
           <div class="row">
             <div class="column-full">
@@ -38,15 +38,20 @@
     <div data-view="monster-view" class="view hidden">
       <div class="container">
         <div class="row">
-          <h2>How to:</h2>
-          <p>Monster Search:Within the search bar, type the name of the monster you wish to look
-            up. Followed by clicking on the D20 submit button.
-          </p>
+          <div class="column-full">
+            <h2>How to:</h2>
+            <button type="button" class="home-button">HOME</button>
+          </div>
+          <div class="column-full">
+            <p>Monster Search:Within the search bar, type the name of the monster you wish to look
+                up. Followed by clicking on the D20 submit button.
+            </p>
+          </div>
         </div>
           <form id="monster-input">
             <div class="row">
               <input class='monster-search-bar' type="text" placeholder="Monster name...">
-              <button class="submit-monster-button"><i class="fa-solid fa-dice-d20"></i></button>
+              <button class="submit-monster-button">SUBMIT MONSTER<i class="fa-solid fa-dice-d20"></i></button>
             </div>
           </form>
           <div class="row">

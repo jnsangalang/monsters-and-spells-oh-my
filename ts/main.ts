@@ -10,6 +10,7 @@ interface Spell{
 let $monsterSearchBar = document.querySelector('.monster-search-bar');
 let $monsterSearchButton = document.querySelector('.monster-search-button');
 let $view = document.querySelectorAll('.view');
+let $homeButton = document.querySelector('.home-button');
 
 const domQueries: Record<string,any> = {
   $monsterSearchBar,
@@ -27,6 +28,10 @@ for(const key in domQueries){
 
 $monsterSearchButton?.addEventListener('click',()=>{
   viewSwap('monster-view');
+})
+
+$homeButton?.addEventListener('click', ()=>{
+  viewSwap('home-view');
 })
 
 function viewSwap(string:string):void{

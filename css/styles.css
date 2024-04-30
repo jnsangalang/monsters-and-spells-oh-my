@@ -4,6 +4,14 @@
   margin-bottom: 6rem;
 }
 
+h2{
+  float: left;
+}
+
+.home-button{
+  float:right;
+}
+
 .monster-search-button{
   margin-bottom: 6rem;
 }
