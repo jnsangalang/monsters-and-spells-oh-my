@@ -8,22 +8,52 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="sylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
   </head>
   <body>
     <header></header>
     <main>
-      <div class="container"></div>
-      <div class="column-full">
-        <img
-          src="https://www.doubledanegames.com/wp-content/uploads/2020/11/dungeons-dragons.png"
-          alt="title:Dungeons and Dragons" />
+      <div data-view="main-view" class="view">
+        <div class="container"></div>
+          <div class="row">
+            <div class="column-full">
+            <img class="image"
+              src="https://www.doubledanegames.com/wp-content/uploads/2020/11/dungeons-dragons.png"
+              alt="title:Dungeons and Dragons" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-half">
+              <button type="button" class="monster-search-button">Monster Search</button>
+            </div>
+            <div class="column-half">
+              <button type="button" class="spell-search-button">Spell Search</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="column-half">
-        <button type="button" class="monster-search">Monster Search</button>
+    <div data-view="monster-view" class="view hidden">
+      <div class="container">
+        <div class="row">
+          <h2>How to:</h2>
+          <p>Monster Search:Within the search bar, type the name of the monster you wish to look
+            up. Followed by clicking on the D20 submit button.
+          </p>
+        </div>
+          <form id="monster-input">
+            <div class="row">
+              <input class='monster-search-bar' type="text" placeholder="Monster name...">
+              <button class="submit-monster-button"><i class="fa-solid fa-dice-d20"></i></button>
+            </div>
+          </form>
+          <div class="row">
+             <textarea rows="10" disabled class="monster-information"></textarea>
+          </div>
       </div>
-      <div class="column-half">
-        <button type="button" class="spell-search">Spell Search</button>
-      </div>
+    </div>
     </main>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
