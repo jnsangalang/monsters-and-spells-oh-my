@@ -61,7 +61,6 @@ async function retrieveMonsterInformation(monsterName) {
     const monstersInfo = responseMonsters.results;
     console.log('monsterInfo:', monstersInfo);
     try {
-        const monsterinformation = {};
         for (let i = 0; i < monstersInfo.length; i++) {
             if (monstersInfo[i].name.toLowerCase() === monsterName.toLowerCase()) {
                 const response = await fetch(`https://www.dnd5eapi.co${monstersInfo[i].url}`);
@@ -73,15 +72,26 @@ async function retrieveMonsterInformation(monsterName) {
                 $monsterTitle.classList.add('.row');
                 $monsterTitle.textContent = monsterData.name;
                 $divMonster?.append($monsterTitle);
-                const $monsterParagraph = document.createElement('p');
-                $monsterParagraph.classList.add('.row');
-                for (let i = 0; i < monsterData.actions.length; i++) {
-                    Object.assign(monsterData.actions[i].name);
-                    Object.assign(monsterData.actions[i].desc);
-                    $monsterParagraph.textContent = actions.toString();
-                    $monsterParagraph.append(description.toString());
+                let monsterInformation = {};
+                for (let i = 0; i < monsterData.armor_class.length; i++) {
+                    const $monsterParagraph = document.createElement('p');
+                    $monsterParagraph.classList.add('.row');
+                    const currentMonsterInformation = monsterData.armor_class[i];
+                    let armorClass = currentMonsterInformation;
+                    monsterInformation.armorClass = armorClass;
+                    $monsterParagraph.textContent = 'Armor Class:' + monsterInformation.armorClass.value;
+                    $monsterTitle.append($monsterParagraph);
                 }
-                $monsterTitle.append($monsterParagraph);
+                for (let i = 0; i < monsterData.actions.length; i++) {
+                    const $monsterParagraph = document.createElement('p');
+                    $monsterParagraph.classList.add('.row');
+                    const currentMonsterInformation = monsterData.actions[i];
+                    let actions = currentMonsterInformation.name + ':' + currentMonsterInformation.desc;
+                    monsterInformation.actions = actions;
+                    $monsterParagraph.textContent = monsterInformation.actions;
+                    $monsterTitle.append($monsterParagraph);
+                }
+                return $divMonster;
             }
             else {
                 $monsterInformation.textContent = "Monster not found";
