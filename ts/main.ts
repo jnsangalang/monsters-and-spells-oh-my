@@ -6,6 +6,25 @@ interface MonsterName{
   name:string
 }
 
+interface MonsterInformation{
+  actions:string,
+  type:string,
+  armorClass:number,
+  specialAbilities:string,
+  hitDice:string,
+  hitPoints:number,
+  strength:number,
+  intelligence:number,
+  wisdom:number,
+  charisma:number,
+  dexterity:number,
+  constitution:number,
+  damageImmunities?: string,
+  damageResistance?: string,
+  damageVulnerabilities?: string,
+  legendaryActions?:string
+
+}
 
 interface Spell{
   name:string;
@@ -23,6 +42,7 @@ let $view = document.querySelectorAll('.view');
 let $homeButton = document.querySelector('.home-button');
 let $monsterInformation = document.querySelector('.monster-information') as HTMLDivElement;
 let $submitMonsterButton = document.querySelector('.submit-monster-button');
+let $divMonster = document.querySelector('#monster-information');
 
 const domQueries: Record<string,any> = {
   $formInput,
@@ -31,7 +51,8 @@ const domQueries: Record<string,any> = {
   $view,
   $homeButton,
   $monsterInformation,
-  $submitMonsterButton
+  $submitMonsterButton,
+  $divMonster
 }
 
 for(const key in domQueries){
@@ -85,9 +106,14 @@ async function retrieveMonsterInformation(monsterName:string){
   $monsterInformation.textContent="Looking up...";
     const responseMonsters = await response.json();
     const monstersInfo = responseMonsters.results;
-    console.log(monstersInfo);
+    console.log('monsterInfo:',monstersInfo);
 
   try {
+   const monsterinformation ={
+
+    }
+
+
     for(let i = 0; i < monstersInfo.length ; i++){
       if(monstersInfo[i].name.toLowerCase() === monsterName.toLowerCase()){
 
@@ -97,23 +123,36 @@ async function retrieveMonsterInformation(monsterName:string){
         const matchMonsterResponse = await response.json();
         const monsterData = matchMonsterResponse;
 
-        console.log(monsterData);
+        console.log('monsterData:',monsterData);
+
 
         const $monsterTitle = document.createElement('h2');
         $monsterTitle.classList.add('.row');
         $monsterTitle.textContent = monsterData.name;
 
+        $divMonster?.append($monsterTitle);
+
         const $monsterParagraph = document.createElement('p');
         $monsterParagraph.classList.add('.row');
-        $monsterParagraph.textContent = monsterData.Index;
+        for(let i = 0; i <monsterData.actions.length; i++){
+          Object.assign(monsterData.actions[i].name);
+          Object.assign(monsterData.actions[i].desc);
+
+          $monsterParagraph.textContent = actions.toString();
+          $monsterParagraph.append(description.toString());
+        }
 
         $monsterTitle.append($monsterParagraph);
+
+
+
 
       }
       else {
         $monsterInformation.textContent = "Monster not found";
     }
     }
+    return $divMonster;
   }
   catch(error){
     if(!response.ok){
