@@ -1,26 +1,30 @@
-.image{
+.image {
   width: 100%;
   margin-top: 10rem;
   margin-bottom: 6rem;
 }
 
-.how-to{
+.how-to {
   float: left;
 }
 
-.home-button{
-  float:right;
+.home-button {
+  float: right;
 }
 
-.monster-search-button{
+.monster-search-button {
   margin-bottom: 6rem;
 }
 
-.monster-information{
-  width:100%;
+.monster-image {
+  width: 50%;
+}
+
+.monster-information {
+  width: 100%;
   text-align: center;
 }
 
-p{
+p {
   text-align: left;
 }

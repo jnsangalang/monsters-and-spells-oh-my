@@ -1,10 +1,10 @@
 /* exported data */
-interface Data{
-  view:string,
-  list:Spell[],
-};
+// interface Data{
+//   view:string,
+//   // list:Spell[],
+// };
 
-let data:Data = {
-  view:'form',
-  list:[],
-};
+// let data:Data = {
+//   view:'form',
+//   // list:[],
+// };
