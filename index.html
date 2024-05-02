@@ -14,6 +14,11 @@
       integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Oleo+Script:wght@400;700&display=swap"
+      rel="stylesheet" />
   </head>
   <body>
     <header></header>
@@ -36,18 +41,22 @@
             </div>
             <div class="column-half">
               <button type="button" class="spell-search-button">
-                Spell Search
+                Create Spell List
               </button>
             </div>
           </div>
         </div>
       </div>
       <div data-view="monster-view" class="view hidden">
-        <div class="container">
+        <div class="home-button-container">
+          <div class="row">
+            <button type="button" class="home-button">HOME</button>
+          </div>
+        </div>
+        <div class="container monster-container">
           <div class="row">
             <div class="column-full">
               <h2 class="how-to">How to:</h2>
-              <button type="button" class="home-button">HOME</button>
             </div>
             <div class="column-full">
               <p>
@@ -57,19 +66,61 @@
               </p>
             </div>
           </div>
-          <form id="form-input">
-            <div class="row">
+        </div>
+        <form id="form-input">
+          <div class="row">
+            <div class="column-half-button search-bar">
               <input
                 id="name"
                 class="monster-input"
                 type="text"
                 placeholder="Monster name..." />
+            </div>
+            <div class="column-half-button">
               <button class="submit-monster-button">
+                <i class="fa-solid fa-dice-d20"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="container monster-container">
+          <div id="monster-information" class="monster-information">
+            <textarea rows="30" disabled></textarea>
+          </div>
+        </div>
+      </div>
+      <div data-view="spell-view" class="view hidden">
+        <div class="home-button-container">
+          <div class="row">
+            <button type="button" class="home-button">HOME</button>
+          </div>
+        </div>
+        <div class="spell-container">
+          <div class="row">
+            <div class="column-full">
+              <h2 class="how-to">How to:</h2>
+            </div>
+            <div class="column-full">
+              <p>
+                Spell Search:Within the search bar, type the name of the monster
+                you wish to look up. Followed by clicking on the D20 submit
+                button.
+              </p>
+            </div>
+          </div>
+          <form id="spell-form-input">
+            <div class="row">
+              <input
+                id="spell-name"
+                class="spell-input"
+                type="text"
+                placeholder="Spell name..." />
+              <button class="submit-spell-button">
                 <i class="fa-solid fa-dice-d20"></i> SUBMIT MONSTER
               </button>
             </div>
           </form>
-          <div id="monster-information" class="monster-information"></div>
+          <div id="spell-information" class="spell-information"></div>
         </div>
       </div>
     </main>

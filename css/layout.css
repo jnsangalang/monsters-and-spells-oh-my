@@ -10,6 +10,7 @@
   display: flex;
   flex-wrap: wrap;
   text-align: center;
+  align-items: center;
 }
 
 .row-monster {
@@ -22,6 +23,10 @@
 .column-full,
 .column-half {
   width: 100%;
+}
+
+.column-half-button {
+  width: 50%;
 }
 
 @media screen and (width >= 768px) {

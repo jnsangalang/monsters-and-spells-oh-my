@@ -46,6 +46,7 @@ const $submitMonsterButton = document.querySelector('.submit-monster-button');
 const $divMonster = document.querySelector(
   '#monster-information',
 ) as HTMLDivElement;
+const $spellSearchButton = document.querySelector('.spell-search-button');
 
 const domQueries: Record<string, any> = {
   $formInput,
@@ -56,6 +57,7 @@ const domQueries: Record<string, any> = {
   $monsterInformation,
   $submitMonsterButton,
   $divMonster,
+  $spellSearchButton,
 };
 
 for (const key in domQueries) {
@@ -68,6 +70,10 @@ $monsterSearchButton?.addEventListener('click', () => {
 
 $homeButton?.addEventListener('click', () => {
   viewSwap('home-view');
+});
+
+$spellSearchButton?.addEventListener('click', () => {
+  viewSwap('spell-view');
 });
 
 $submitMonsterButton?.addEventListener('click', (event: Event) => {
@@ -95,7 +101,7 @@ function viewSwap(string: string): void {
     }
   }
 }
-
+// async to get monster information from API
 async function retrieveMonsterInformation(monsterName: string): Promise<void> {
   const response = await fetch('https://www.dnd5eapi.co/api/monsters');
 
@@ -130,6 +136,7 @@ async function retrieveMonsterInformation(monsterName: string): Promise<void> {
 
 function renderMonster(monsterData: MonsterInformation): HTMLDivElement {
   const $monsterTitle = document.createElement('h1');
+  $monsterTitle.classList.add('title-name');
   $monsterTitle.textContent = monsterData.name;
 
   $divMonster?.append($monsterTitle);
@@ -165,6 +172,7 @@ function renderMonster(monsterData: MonsterInformation): HTMLDivElement {
   const monsterInformation: any = {};
   // Strength Stat
   const $monsterStrength = document.createElement('p');
+  $monsterStrength.classList.add('monster-text-information');
 
   let currentMonsterInformation = monsterData.strength;
 
@@ -176,6 +184,7 @@ function renderMonster(monsterData: MonsterInformation): HTMLDivElement {
 
   // Dexterity Stat
   const $monsterDexterity = document.createElement('p');
+  $monsterDexterity.classList.add('monster-text-information');
 
   currentMonsterInformation = monsterData.dexterity;
 
@@ -187,6 +196,7 @@ function renderMonster(monsterData: MonsterInformation): HTMLDivElement {
 
   // Constitution Stat
   const $monsterConstitution = document.createElement('p');
+  $monsterConstitution.classList.add('monster-text-information');
 
   currentMonsterInformation = monsterData.constitution;
 
@@ -198,6 +208,7 @@ function renderMonster(monsterData: MonsterInformation): HTMLDivElement {
 
   // Interlligence Stat
   const $monsterIntelligence = document.createElement('p');
+  $monsterIntelligence.classList.add('monster-text-information');
 
   currentMonsterInformation = monsterData.intelligence;
 
@@ -209,6 +220,7 @@ function renderMonster(monsterData: MonsterInformation): HTMLDivElement {
 
   // Wisdom Stat
   const $monsterWisdom = document.createElement('p');
+  $monsterWisdom.classList.add('monster-text-information');
 
   currentMonsterInformation = monsterData.wisdom;
 
@@ -219,6 +231,7 @@ function renderMonster(monsterData: MonsterInformation): HTMLDivElement {
   $monsterStats.append($monsterWisdom);
   // Charisma Stat
   const $monsterCharisma = document.createElement('p');
+  $monsterCharisma.classList.add('monster-text-information');
 
   currentMonsterInformation = monsterData.charisma;
 
@@ -230,6 +243,7 @@ function renderMonster(monsterData: MonsterInformation): HTMLDivElement {
 
   // Type of Creature
   const $monsterType = document.createElement('p');
+  $monsterType.classList.add('monster-text-information');
 
   const currentMonsterInformationString = monsterData.type;
 
@@ -240,6 +254,7 @@ function renderMonster(monsterData: MonsterInformation): HTMLDivElement {
 
   for (let i = 0; i < monsterData.armor_class.length; i++) {
     const $monsterParagraph = document.createElement('p');
+    $monsterParagraph.classList.add('monster-text-information');
 
     const currentMonsterInformation = monsterData.armor_class[i];
 
@@ -252,6 +267,7 @@ function renderMonster(monsterData: MonsterInformation): HTMLDivElement {
 
   for (let i = 0; i < monsterData.actions.length; i++) {
     const $monsterParagraph = document.createElement('p');
+    $monsterParagraph.classList.add('monster-text-information');
 
     const currentMonsterInformation = monsterData.actions[i];
 
@@ -264,6 +280,7 @@ function renderMonster(monsterData: MonsterInformation): HTMLDivElement {
 
   for (let i = 0; i < monsterData.special_abilities.length; i++) {
     const $monsterParagraph = document.createElement('p');
+    $monsterParagraph.classList.add('monster-text-information');
 
     const currentMonsterInformation = monsterData.special_abilities[i];
 
@@ -275,3 +292,35 @@ function renderMonster(monsterData: MonsterInformation): HTMLDivElement {
   }
   return $divMonster;
 }
+// async function to retrieve spell information from API
+// async function retrieveSpellInformation(spellName: string): Promise<void> {
+//   const response = await fetch('https://www.dnd5eapi.co/api/spells');
+
+//   $monsterInformation.textContent = 'Looking up...';
+//   const responseMonsters = await response.json();
+//   const monstersInfo = responseMonsters.results;
+
+//   try {
+//     for (let i = 0; i < monstersInfo.length; i++) {
+//       if (monstersInfo[i].name.toLowerCase() === monsterName.toLowerCase()) {
+//         const response = await fetch(
+//           `https://www.dnd5eapi.co${monstersInfo[i].url}`,
+//         );
+
+//         const matchMonsterResponse = await response.json();
+//         const monsterData = matchMonsterResponse;
+
+//         $monsterInformation.textContent = '';
+//         renderMonster(monsterData);
+//       } else if (!monstersInfo[i]) {
+//         $monsterInformation.textContent = 'Monster not found';
+//       }
+//     }
+//   } catch (error) {
+//     if (!response.ok) {
+//       const message = `Failed to get monsters, Error ${response.status}`;
+//       $monsterInformation.textContent = 'Error retrieving monster data';
+//       throw new Error(message);
+//     }
+//   }
+// }
