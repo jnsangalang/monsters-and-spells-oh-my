@@ -37,4 +37,12 @@
   .column-half {
     width: 50%;
   }
+
+  .fa-solid {
+    font-size: 5rem;
+  }
+
+  .spell-search-button {
+    margin-bottom: 6rem;
+  }
 }

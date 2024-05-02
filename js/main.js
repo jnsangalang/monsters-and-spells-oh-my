@@ -61,7 +61,7 @@ function viewSwap(string) {
     }
   }
 }
-//async to get monster information from API
+// async to get monster information from API
 async function retrieveMonsterInformation(monsterName) {
   const response = await fetch('https://www.dnd5eapi.co/api/monsters');
   $monsterInformation.textContent = 'Looking up...';
@@ -77,7 +77,8 @@ async function retrieveMonsterInformation(monsterName) {
         const monsterData = matchMonsterResponse;
         $monsterInformation.textContent = '';
         renderMonster(monsterData);
-      } else if (!monstersInfo[i]) {
+        return;
+      } else {
         $monsterInformation.textContent = 'Monster not found';
       }
     }
@@ -209,7 +210,7 @@ function renderMonster(monsterData) {
   }
   return $divMonster;
 }
-//async function to retrieve spell information from API
+// async function to retrieve spell information from API
 // async function retrieveSpellInformation(spellName: string): Promise<void> {
 //   const response = await fetch('https://www.dnd5eapi.co/api/spells');
 //   $monsterInformation.textContent = 'Looking up...';
