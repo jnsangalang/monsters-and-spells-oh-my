@@ -4,7 +4,7 @@
   margin-bottom: 6rem;
 }
 
-h2{
+.how-to{
   float: left;
 }
 
@@ -18,4 +18,9 @@ h2{
 
 .monster-information{
   width:100%;
+  text-align: center;
+}
+
+p{
+  text-align: left;
 }

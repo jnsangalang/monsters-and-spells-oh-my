@@ -7,10 +7,12 @@
 }
 
 .row {
-  display: flex;
+  display:flex;
   flex-wrap: wrap;
   text-align: center;
 }
+
+
 
 .column-full,
 .column-half {
