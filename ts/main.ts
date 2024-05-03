@@ -11,8 +11,6 @@ interface MonsterInformation {
   type: string;
   armor_class: [];
   special_abilities: [{ name: string; desc: string }];
-  hitDice: string;
-  hitPoints: number;
   image: string;
   strength: number;
   intelligence: number;
@@ -22,15 +20,6 @@ interface MonsterInformation {
   constitution: number;
   name: string;
 }
-
-// interface Spell{
-//   name:string;
-//   range:string;
-//   school:string;
-//   concentration:boolean;
-//   castTime: string;
-//   material:string;
-// }
 
 const $formInput = document.querySelector('#form-input') as HTMLFormElement;
 const $monsterInput = document.querySelector(
@@ -103,13 +92,12 @@ function viewSwap(string: string): void {
 }
 // async to get monster information from API
 async function retrieveMonsterInformation(monsterName: string): Promise<void> {
-  const response = await fetch('https://www.dnd5eapi.co/api/monsters');
-
-  $monsterInformation.textContent = 'Looking up...';
-  const responseMonsters = await response.json();
-  const monstersInfo = responseMonsters.results;
-
   try {
+    const response = await fetch('https://www.dnd5eapi.co/api/monsters');
+
+    $monsterInformation.textContent = 'Looking up...';
+    const responseMonsters = await response.json();
+    const monstersInfo = responseMonsters.results;
     for (let i = 0; i < monstersInfo.length; i++) {
       if (monstersInfo[i].name.toLowerCase() === monsterName.toLowerCase()) {
         const response = await fetch(
@@ -121,16 +109,20 @@ async function retrieveMonsterInformation(monsterName: string): Promise<void> {
 
         $monsterInformation.textContent = '';
         renderMonster(monsterData);
-      } else if (!monstersInfo[i]) {
+        return;
+      } else if (
+        monstersInfo[i].name.toLowerCase() !== monsterName.toLowerCase()
+      ) {
         $monsterInformation.textContent = 'Monster not found';
       }
     }
-  } catch (error) {
     if (!response.ok) {
       const message = `Failed to get monsters, Error ${response.status}`;
       $monsterInformation.textContent = 'Error retrieving monster data';
       throw new Error(message);
     }
+  } catch (error) {
+    $monsterInformation.textContent = 'Error retrieving monster data';
   }
 }
 
@@ -292,35 +284,3 @@ function renderMonster(monsterData: MonsterInformation): HTMLDivElement {
   }
   return $divMonster;
 }
-// async function to retrieve spell information from API
-// async function retrieveSpellInformation(spellName: string): Promise<void> {
-//   const response = await fetch('https://www.dnd5eapi.co/api/spells');
-
-//   $monsterInformation.textContent = 'Looking up...';
-//   const responseMonsters = await response.json();
-//   const monstersInfo = responseMonsters.results;
-
-//   try {
-//     for (let i = 0; i < monstersInfo.length; i++) {
-//       if (monstersInfo[i].name.toLowerCase() === monsterName.toLowerCase()) {
-//         const response = await fetch(
-//           `https://www.dnd5eapi.co${monstersInfo[i].url}`,
-//         );
-
-//         const matchMonsterResponse = await response.json();
-//         const monsterData = matchMonsterResponse;
-
-//         $monsterInformation.textContent = '';
-//         renderMonster(monsterData);
-//       } else if (!monstersInfo[i]) {
-//         $monsterInformation.textContent = 'Monster not found';
-//       }
-//     }
-//   } catch (error) {
-//     if (!response.ok) {
-//       const message = `Failed to get monsters, Error ${response.status}`;
-//       $monsterInformation.textContent = 'Error retrieving monster data';
-//       throw new Error(message);
-//     }
-//   }
-// }
