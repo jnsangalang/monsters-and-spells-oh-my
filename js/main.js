@@ -60,6 +60,11 @@ async function retrieveMonsterInformation(monsterName) {
     $monsterInformation.textContent = 'Looking up...';
     const responseMonsters = await response.json();
     const monstersInfo = responseMonsters.results;
+    if (!response.ok) {
+      const message = `Failed to get monsters, Error ${response.status}`;
+      $monsterInformation.textContent = 'Error retrieving monster data';
+      throw new Error(message);
+    }
     for (let i = 0; i < monstersInfo.length; i++) {
       if (monstersInfo[i].name.toLowerCase() === monsterName.toLowerCase()) {
         const response = await fetch(
@@ -75,11 +80,6 @@ async function retrieveMonsterInformation(monsterName) {
       ) {
         $monsterInformation.textContent = 'Monster not found';
       }
-    }
-    if (!response.ok) {
-      const message = `Failed to get monsters, Error ${response.status}`;
-      $monsterInformation.textContent = 'Error retrieving monster data';
-      throw new Error(message);
     }
   } catch (error) {
     $monsterInformation.textContent = 'Error retrieving monster data';
