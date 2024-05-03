@@ -9,6 +9,10 @@ body {
   margin-bottom: 6rem;
 }
 
+header{
+  margin-top:1rem;
+}
+
 .how-to {
   float: left;
 }
@@ -17,6 +21,7 @@ body {
   background-color: rgb(240, 239, 235);
   border: none;
   border-radius: 3rem;
+  cursor: pointer;
   font-family: 'Dancing Script', sans-serif;
   font-size: 1rem;
   font-weight: 700;

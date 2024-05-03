@@ -21,6 +21,19 @@ interface MonsterInformation {
   name: string;
 }
 
+interface SpellName{
+  name:string;
+}
+
+interface Spell{
+  name:string;
+  range:string;
+  school:string;
+  concentration:boolean;
+  castTime: string;
+  material:string;
+}
+
 const $formInput = document.querySelector('#form-input') as HTMLFormElement;
 const $monsterInput = document.querySelector(
   '.monster-input',
@@ -36,6 +49,9 @@ const $divMonster = document.querySelector(
   '#monster-information',
 ) as HTMLDivElement;
 const $spellSearchButton = document.querySelector('.spell-search-button');
+const $spellInformation = document.querySelector('.spell-information') as HTMLDivElement;
+const $submitSpellButton = document.querySelector('.submit-spell-button');
+const $spellFormInput = document.querySelector('#spell-form-input');
 
 const domQueries: Record<string, any> = {
   $formInput,
@@ -47,6 +63,9 @@ const domQueries: Record<string, any> = {
   $submitMonsterButton,
   $divMonster,
   $spellSearchButton,
+  $spellInformation,
+  $submitSpellButton,
+  $spellFormInput,
 };
 
 for (const key in domQueries) {
@@ -285,3 +304,56 @@ function renderMonster(monsterData: MonsterInformation): HTMLDivElement {
   }
   return $divMonster;
 }
+
+// async function to retrieve spell information from API
+async function retrieveSpellInformation(spellName: string): Promise<void> {
+  try {
+    const response = await fetch('https://www.dnd5eapi.co/api/spells');
+
+    $spellInformation.textContent = 'Looking up...';
+    const responseMonsters = await response.json();
+    const monstersInfo = responseMonsters.results;
+    if (!response.ok) {
+      const message = `Failed to get monsters, Error ${response.status}`;
+      $monsterInformation.textContent = 'Error retrieving monster data';
+      throw new Error(message);
+    }
+
+    for (let i = 0; i < monstersInfo.length; i++) {
+      if (monstersInfo[i].name.toLowerCase() === monsterName.toLowerCase()) {
+        const response = await fetch(
+          `https://www.dnd5eapi.co${monstersInfo[i].url}`,
+        );
+
+        const matchMonsterResponse = await response.json();
+        const monsterData = matchMonsterResponse;
+
+        $monsterInformation.textContent = '';
+        renderMonster(monsterData);
+        return;
+      } else if (
+        monstersInfo[i].name.toLowerCase() !== monsterName.toLowerCase()
+      ) {
+        $monsterInformation.textContent = 'Monster not found';
+      }
+    }
+  } catch (error) {
+    $monsterInformation.textContent = 'Error retrieving monster data';
+  }
+}
+
+
+$submitSpellButton?.addEventListener('click', (event: Event) => {
+  event.preventDefault();
+  const $formElement = $formInput.elements as FormElements;
+
+  const spellName: SpellName = {
+    name: $formElement.name.value,
+  };
+
+  if (spellName.name) {
+    retrieveMonsterInformation(spellName.name);
+  } else {
+    $monsterInformation.textContent = 'Please use a spell name';
+  }
+});
