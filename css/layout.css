@@ -1,0 +1,48 @@
+.hidden {
+  display: none !important;
+}
+
+.container {
+  max-width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  align-items: center;
+}
+
+.row-monster {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+}
+
+.column-full,
+.column-half {
+  width: 100%;
+}
+
+.column-half-button {
+  width: 50%;
+}
+
+@media screen and (width >= 768px) {
+  .container {
+    max-width: 100%;
+  }
+
+  .column-half {
+    width: 50%;
+  }
+
+  .fa-solid {
+    font-size: 5rem;
+  }
+
+  .spell-search-button {
+    margin-bottom: 6rem;
+  }
+}

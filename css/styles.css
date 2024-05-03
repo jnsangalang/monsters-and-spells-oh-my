@@ -1,0 +1,100 @@
+body {
+  background-color: rgb(120, 0, 58);
+  margin: 0 3rem;
+}
+
+.image {
+  width: 100%;
+  margin-top: 10rem;
+  margin-bottom: 6rem;
+}
+
+.how-to {
+  float: left;
+}
+
+.home-button {
+  background-color: rgb(240, 239, 235);
+  border: none;
+  border-radius: 3rem;
+  font-family: 'Dancing Script', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.home-button-container {
+  text-align: right;
+}
+
+.monster-container {
+  background-color: rgb(255, 184, 0);
+  margin-top: 4rem;
+  border-radius: 3rem;
+  padding: 0.5rem;
+}
+
+.monster-image {
+  width: 50%;
+}
+
+.monster-input {
+  border: none;
+  border-radius: 3rem;
+  font-family: 'Dancing Script', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 3.5rem;
+  padding: 1.5rem 0.5rem;
+}
+
+.monster-information {
+  width: 100%;
+  text-align: center;
+  font-family: 'Oleo Script', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.monster-search-button {
+  margin-bottom: 6rem;
+}
+
+.monster-search-button,
+.spell-search-button {
+  background-color: rgb(255, 184, 0);
+  border: none;
+  border-radius: 3rem;
+  padding: 1rem 4rem;
+  font-family: 'Dancing Script', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+p {
+  text-align: left;
+}
+
+.submit-monster-button {
+  background-color: transparent;
+  border: none;
+  border-radius: 100rem;
+  cursor: pointer;
+  font-size: 2rem;
+  margin-top: 1rem;
+  padding-left: 3rem;
+  padding-top: 3rem;
+}
+
+textarea {
+  background-color: rgb(255, 184, 0);
+  border: none;
+}
+
+h1 {
+  color: rgb(0, 0, 0);
+}
+
+h2 > .monster-text-information {
+  color: rgb(120, 0, 58);
+  padding: 1 rem;
+}

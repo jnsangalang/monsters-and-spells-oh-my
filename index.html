@@ -1,20 +1,129 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AJAX Project</title>
-  <link rel="icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  <header>
-  </header>
-  <main>
-  </main>
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX Project</title>
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Oleo+Script:wght@400;700&display=swap"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <main>
+      <div data-view="home-view" class="view">
+        <div class="container">
+          <div class="row">
+            <div class="column-full">
+              <img
+                class="image"
+                src="https://www.doubledanegames.com/wp-content/uploads/2020/11/dungeons-dragons.png"
+                alt="title:Dungeons and Dragons" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-half">
+              <button type="button" class="monster-search-button">
+                Monster Search
+              </button>
+            </div>
+            <div class="column-half">
+              <button type="button" class="spell-search-button">
+                Create Spell List
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-view="monster-view" class="view hidden">
+        <div class="home-button-container">
+          <div class="row">
+            <button type="button" class="home-button">HOME</button>
+          </div>
+        </div>
+        <div class="container monster-container">
+          <div class="row">
+            <div class="column-full">
+              <h2 class="how-to">How to:</h2>
+            </div>
+            <div class="column-full">
+              <p>
+                Monster Search:Within the search bar, type the name of the
+                monster you wish to look up. Followed by clicking on the D20
+                submit button.
+              </p>
+            </div>
+          </div>
+        </div>
+        <form id="form-input">
+          <div class="row">
+            <div class="column-half-button search-bar">
+              <input
+                id="name"
+                class="monster-input"
+                type="text"
+                placeholder="Monster name..." />
+            </div>
+            <div class="column-half-button">
+              <button class="submit-monster-button">
+                <i class="fa-solid fa-dice-d20"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="container monster-container">
+          <div id="monster-information" class="monster-information">
+            <textarea rows="30" disabled></textarea>
+          </div>
+        </div>
+      </div>
+      <div data-view="spell-view" class="view hidden">
+        <div class="home-button-container">
+          <div class="row">
+            <button type="button" class="home-button">HOME</button>
+          </div>
+        </div>
+        <div class="spell-container">
+          <div class="row">
+            <div class="column-full">
+              <h2 class="how-to">How to:</h2>
+            </div>
+            <div class="column-full">
+              <p>
+                Spell Search:Within the search bar, type the name of the monster
+                you wish to look up. Followed by clicking on the D20 submit
+                button.
+              </p>
+            </div>
+          </div>
+          <form id="spell-form-input">
+            <div class="row">
+              <input
+                id="spell-name"
+                class="spell-input"
+                type="text"
+                placeholder="Spell name..." />
+              <button class="submit-spell-button">
+                <i class="fa-solid fa-dice-d20"></i> SUBMIT MONSTER
+              </button>
+            </div>
+          </form>
+          <div id="spell-information" class="spell-information"></div>
+        </div>
+      </div>
+    </main>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>
