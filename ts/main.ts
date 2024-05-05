@@ -406,11 +406,13 @@ function renderSpell(spellData: SpellInformation): HTMLDivElement {
 
   const $spellSchoolHeader = document.createElement('h2');
   $spellSchoolHeader.classList.add('column-half');
+  $spellSchoolHeader.classList.add('spell-header');
   $spellSchoolHeader.textContent = 'School';
   $spellSchoolLevelDivContainer?.append($spellSchoolHeader);
 
   const $spellLevelHeader = document.createElement('h2');
   $spellLevelHeader.classList.add('column-half');
+  $spellLevelHeader.classList.add('spell-header');
   $spellLevelHeader.textContent = 'Level';
   $spellSchoolLevelDivContainer?.append($spellLevelHeader);
 
@@ -420,11 +422,13 @@ function renderSpell(spellData: SpellInformation): HTMLDivElement {
 
   const $spellRangeHeader = document.createElement('h2');
   $spellRangeHeader.classList.add('column-half');
+  $spellRangeHeader.classList.add('spell-header');
   $spellRangeHeader.textContent = 'Range';
   $spellRangeCastTimeDivContainer?.append($spellRangeHeader);
 
   const $spellCastTimeHeader = document.createElement('h2');
   $spellCastTimeHeader.classList.add('column-half');
+  $spellCastTimeHeader.classList.add('spell-header');
   $spellCastTimeHeader.textContent = 'Cast Time';
   $spellRangeCastTimeDivContainer?.append($spellCastTimeHeader);
 
@@ -434,17 +438,23 @@ function renderSpell(spellData: SpellInformation): HTMLDivElement {
 
   const $spellConcentrationHeader = document.createElement('h2');
   $spellConcentrationHeader.classList.add('column-half');
+  $spellConcentrationHeader.classList.add('spell-header');
   $spellConcentrationHeader.textContent = 'Concentration';
   $spellDurationConcentrationDivContainer?.append($spellConcentrationHeader);
 
   const $spellDurationHeader = document.createElement('h2');
   $spellDurationHeader.classList.add('column-half');
+  $spellDurationHeader.classList.add('spell-header');
   $spellDurationHeader.textContent = 'Duration';
   $spellDurationConcentrationDivContainer?.append($spellDurationHeader);
 
   const $spellDescriptionDivContainer = document.createElement('div');
   $spellDescriptionDivContainer.classList.add('row');
   $spellTitle.append($spellDescriptionDivContainer);
+
+  const $spellDamageOrHealDivContainer = document.createElement('div');
+  $spellDescriptionDivContainer.classList.add('row');
+  $spellTitle.append($spellDamageOrHealDivContainer);
 
   const $spellDescHeader = document.createElement('h2');
   $spellDescHeader.classList.add('row');
@@ -542,18 +552,32 @@ function renderSpell(spellData: SpellInformation): HTMLDivElement {
 
   // damage of spells
   if (spellData?.damage?.damage_at_slot_level !== undefined) {
+    const $spellDamageHeader = document.createElement('h2');
+    $spellDamageHeader.classList.add('row');
+    $spellDamageHeader.textContent = 'Damage';
+    $spellDamageOrHealDivContainer?.append($spellDamageHeader);
+  }
+  if (spellData?.damage?.damage_at_slot_level !== undefined) {
     spellInformation.damage = spellData.damage?.damage_at_slot_level;
     let currentDamage = '';
     for (const [key, value] of Object.entries(spellInformation.damage)) {
       const $spellDamageInformation = document.createElement('p');
       $spellDamageInformation.classList.add('spell-text-information');
+      $spellDamageInformation.classList.add('spell-damage-text');
+
       currentDamage = 'Level ' + key + ': ' + value;
       $spellDamageInformation.textContent = currentDamage;
-      $spellDescHeader.append($spellDamageInformation);
+      $spellDamageOrHealDivContainer.append($spellDamageInformation);
     }
   }
 
   // healing of spells
+  if (spellData?.heal_at_slot_level !== undefined) {
+    const $spellHealHeader = document.createElement('h2');
+    $spellHealHeader.classList.add('row');
+    $spellHealHeader.textContent = 'Heal';
+    $spellDamageOrHealDivContainer?.append($spellHealHeader);
+  }
   if (spellData?.heal_at_slot_level !== undefined) {
     spellInformation.heal_at_slot_level = spellData.heal_at_slot_level;
     let currentHeal = '';
@@ -562,9 +586,11 @@ function renderSpell(spellData: SpellInformation): HTMLDivElement {
     )) {
       const $spellHealInformation = document.createElement('p');
       $spellHealInformation.classList.add('spell-text-information');
+      $spellHealInformation.classList.add('spell-heal-text');
+
       currentHeal = 'Level ' + key + ': ' + value;
       $spellHealInformation.textContent = currentHeal;
-      $spellDescHeader.append($spellHealInformation);
+      $spellDamageOrHealDivContainer.append($spellHealInformation);
     }
   }
   return $divSpell;

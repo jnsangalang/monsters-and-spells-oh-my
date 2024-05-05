@@ -83,6 +83,15 @@ p {
   text-align: left;
 }
 
+.spell-damage-text,
+.spell-heal-text {
+  color: rgb(120, 0, 58);
+}
+
+.spell-header {
+  line-height: 0.2rem;
+}
+
 .submit-monster-button,
 .submit-spell-button {
   background-color: transparent;
@@ -111,4 +120,5 @@ h2 > .monster-text-information {
 
 h2 > .spell-text-information {
   text-align: center;
+  color: rgb(120, 0, 58);
 }
