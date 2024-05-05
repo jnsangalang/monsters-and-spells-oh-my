@@ -20,8 +20,8 @@
       href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Oleo+Script:wght@400;700&display=swap"
       rel="stylesheet" />
   </head>
-            <header><button type="button" class="home-button">HOME</button></header>
   <body>
+    <header><button type="button" class="home-button">HOME</button></header>
     <main>
       <div data-view="home-view" class="view">
         <div class="container">
@@ -53,7 +53,7 @@
             <div class="column-full">
               <h2 class="how-to">How to:</h2>
             </div>
-            <div class="column-full">
+            <div class="how-to column-full">
               <p>
                 Monster Search: Within the search bar, type the name of the
                 monster you wish to look up. Followed by clicking on the D20
@@ -90,38 +90,38 @@
             <div class="column-full">
               <h2 class="how-to">How to:</h2>
             </div>
-            <div class="column-full">
+            <div class="how-to column-full">
               <p>
-                Spell Search: Within the search bar, type the name of the monster
-                you wish to look up. Followed by clicking on the D20 submit
-                button.
+                Spell Search: Within the search bar, type the name of the
+                monster you wish to look up. Followed by clicking on the D20
+                submit button.
               </p>
             </div>
           </div>
         </div>
-          <form id="spell-form-input">
-            <div class="row">
-                <div class="column-half-button search-bar">
-                  <input
-                    id="spellName"
-                    class="spell-input"
-                    type="text"
-                    placeholder="Spell name..." />
-                </div>
-              <div class="column-half-button">
-                <button class="submit-spell-button">
-                  <i class="fa-solid fa-dice-d20"></i> SPELL
-                </button>
-              </div>
+        <form id="spell-form-input">
+          <div class="row">
+            <div class="column-half-button search-bar">
+              <input
+                id="spellName"
+                class="spell-input"
+                type="text"
+                placeholder="Spell name..." />
             </div>
-          </form>
-          <div class="container spell-container">
-            <div id="spell-information" class="spell-information container">
-              <textarea rows="30" disabled></textarea>
+            <div class="column-half-button">
+              <button class="submit-spell-button">
+                <i class="fa-solid fa-dice-d20"></i>
+              </button>
             </div>
           </div>
+        </form>
+        <div class="container spell-container">
+          <div id="spell-information" class="spell-information container">
+            <textarea rows="30" disabled></textarea>
+          </div>
         </div>
-      </main>
+      </div>
+    </main>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
   </body>
