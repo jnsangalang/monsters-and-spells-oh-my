@@ -1,6 +1,2 @@
-"use strict";
-;
-let data = {
-    view: 'form',
-    // list:[],
-};
+'use strict';
+/* exported data */
