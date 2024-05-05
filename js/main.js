@@ -219,7 +219,6 @@ async function retrieveSpellInformation(spellName) {
     $spellInformation.textContent = 'Looking up...';
     const responseSpells = await response.json();
     const spellsInfo = responseSpells.results;
-    console.log('spell info:', spellsInfo);
     if (!response.ok) {
       const message = `Failed to get spells, Error ${response.status}`;
       $spellInformation.textContent = 'Error retrieving spell data';
@@ -232,7 +231,6 @@ async function retrieveSpellInformation(spellName) {
         );
         const matchSpellResponse = await response.json();
         const spellData = matchSpellResponse;
-        console.log('spell  data:', spellData);
         $spellInformation.textContent = '';
         renderSpell(spellData);
         return;
@@ -244,7 +242,7 @@ async function retrieveSpellInformation(spellName) {
     $spellInformation.textContent = 'Error retrieving spell data';
   }
 }
-//add eventlistener for spell submit button to call async retrieve spell information
+// add eventlistener for spell submit button to call async retrieve spell information
 $submitSpellButton?.addEventListener('click', (event) => {
   event.preventDefault();
   const $spellFormElement = $spellFormInput.elements;
@@ -257,7 +255,7 @@ $submitSpellButton?.addEventListener('click', (event) => {
     $spellInformation.textContent = 'Please use a spell name';
   }
 });
-//Function to render spell htmlelements with information
+// Function to render spell htmlelements with information
 function renderSpell(spellData) {
   const $spellTitle = document.createElement('h1');
   $spellTitle.classList.add('title-name');
@@ -306,55 +304,55 @@ function renderSpell(spellData) {
   // Spell level information
   const $spellLevel = document.createElement('p');
   $spellLevel.classList.add('spell-text-information');
-  let spellInformation = {};
-  //Introduce variable that will change as it pushes information to spellInformation object
-  let currentSpellInformation = spellData.level;
+  const spellInformation = {};
+  // Introduce variable that will change as it pushes information to spellInformation object
+  const currentSpellInformation = spellData.level;
   const spellLevel = currentSpellInformation;
   spellInformation.level = spellLevel;
   $spellLevel.textContent = spellInformation.level;
   $spellLevelHeader.append($spellLevel);
-  //Spell school information
+  // Spell school information
   const $spellSchoolInformation = document.createElement('p');
   $spellSchoolInformation.classList.add('spell-text-information');
-  let spellSchoolInformation = spellData.school.name.toString();
+  const spellSchoolInformation = spellData.school.name.toString();
   const spellSchool = spellSchoolInformation;
   spellInformation.school = spellSchool;
   $spellSchoolInformation.textContent = spellInformation.school;
   $spellSchoolHeader.append($spellSchoolInformation);
-  //Spell range information
+  // Spell range information
   const $spellRangeInformation = document.createElement('p');
   $spellRangeInformation.classList.add('spell-text-information');
-  let spellRangeInformation = spellData.range;
+  const spellRangeInformation = spellData.range;
   const spellRange = spellRangeInformation;
   spellInformation.range = spellRange;
   $spellRangeInformation.textContent = spellInformation.range;
   $spellRangeHeader.append($spellRangeInformation);
-  //Spell cast time information
+  // Spell cast time information
   const $spellCastTimeInformation = document.createElement('p');
   $spellCastTimeInformation.classList.add('spell-text-information');
-  let spellCastTimeInformation = spellData.casting_time;
+  const spellCastTimeInformation = spellData.casting_time;
   const spellCastTime = spellCastTimeInformation;
   spellInformation.castTime = spellCastTime;
   $spellCastTimeInformation.textContent = spellInformation.castTime;
   $spellCastTimeHeader.append($spellCastTimeInformation);
-  //Spell concentration
+  // Spell concentration
   const $spellConcentrationInformation = document.createElement('p');
   $spellConcentrationInformation.classList.add('spell-text-information');
-  let spellConcentrationInformation = spellData.concentration;
+  const spellConcentrationInformation = spellData.concentration;
   const spellConcentration = spellConcentrationInformation;
   spellInformation.concentration = spellConcentration;
   $spellConcentrationInformation.textContent =
     spellInformation.concentration.toString();
   $spellConcentrationHeader.append($spellConcentrationInformation);
-  //Spell duration
+  // Spell duration
   const $spellDurationInformation = document.createElement('p');
   $spellDurationInformation.classList.add('spell-text-information');
-  let spellDurationInformation = spellData.duration;
+  const spellDurationInformation = spellData.duration;
   const spellDuration = spellDurationInformation;
   spellInformation.duration = spellDuration;
   $spellDurationInformation.textContent = spellInformation.duration;
   $spellDurationHeader.append($spellDurationInformation);
-  //description of spells
+  // description of spells
   for (let i = 0; i < spellData.desc.length; i++) {
     const $spellDescriptionInformation = document.createElement('p');
     $spellDescriptionInformation.classList.add('spell-text-information');
@@ -364,7 +362,7 @@ function renderSpell(spellData) {
   }
   const $spellDamageInformation = document.createElement('p');
   $spellDamageInformation.classList.add('spell-text-information');
-  //damage of spells
+  // damage of spells
   if (spellData?.damage?.damage_at_slot_level !== undefined) {
     spellInformation.damage = spellData.damage?.damage_at_slot_level;
     let currentDamage = '';
@@ -376,7 +374,7 @@ function renderSpell(spellData) {
       $spellDescHeader.append($spellDamageInformation);
     }
   }
-  //healing of spells
+  // healing of spells
   if (spellData?.heal_at_slot_level !== undefined) {
     spellInformation.heal_at_slot_level = spellData.heal_at_slot_level;
     let currentHeal = '';

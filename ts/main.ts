@@ -350,7 +350,6 @@ async function retrieveSpellInformation(spellName: string): Promise<void> {
     $spellInformation.textContent = 'Looking up...';
     const responseSpells = await response.json();
     const spellsInfo = responseSpells.results;
-    console.log('spell info:', spellsInfo);
     if (!response.ok) {
       const message = `Failed to get spells, Error ${response.status}`;
       $spellInformation.textContent = 'Error retrieving spell data';
@@ -365,8 +364,6 @@ async function retrieveSpellInformation(spellName: string): Promise<void> {
 
         const matchSpellResponse = await response.json();
         const spellData = matchSpellResponse;
-        console.log('spell  data:', spellData);
-
         $spellInformation.textContent = '';
         renderSpell(spellData);
         return;
