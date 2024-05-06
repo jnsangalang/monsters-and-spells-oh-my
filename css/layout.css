@@ -53,6 +53,11 @@
     font-size: 4rem;
   }
 
+  .monster-search-button,
+  .spell-search-button {
+    margin-top: 5rem;
+  }
+
   .spell-search-button {
     margin-bottom: 6rem;
   }

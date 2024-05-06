@@ -122,6 +122,10 @@ $spellSearchButton?.addEventListener('click', () => {
   viewSwap('spell-view');
 });
 
+$spellListButton?.addEventListener('click', () => {
+  viewSwap('spell-list-view');
+});
+
 $submitMonsterButton?.addEventListener('click', (event: Event) => {
   event.preventDefault();
   const $formElement = $formInput.elements as FormElements;

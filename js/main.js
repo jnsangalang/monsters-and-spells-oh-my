@@ -40,6 +40,9 @@ $homeButton?.addEventListener('click', () => {
 $spellSearchButton?.addEventListener('click', () => {
   viewSwap('spell-view');
 });
+$spellListButton?.addEventListener('click', () => {
+  viewSwap('spell-list-view');
+});
 $submitMonsterButton?.addEventListener('click', (event) => {
   event.preventDefault();
   const $formElement = $formInput.elements;
