@@ -88,6 +88,11 @@ const $divSpell = document.querySelector(
   '#spell-information',
 ) as HTMLDivElement;
 const $spellListButton = document.querySelector('.spell-list-button');
+const $monsterSearchButton2 = document.querySelector(
+  '.monster-search-button-2',
+);
+const $spellSearchButton2 = document.querySelector('.spell-search-button-2');
+
 const domQueries: Record<string, any> = {
   $formInput,
   $monsterInput,
@@ -102,6 +107,8 @@ const domQueries: Record<string, any> = {
   $submitSpellButton,
   $spellFormInput,
   $spellListButton,
+  $monsterSearchButton2,
+  $spellSearchButton2,
 };
 
 for (const key in domQueries) {
@@ -112,11 +119,19 @@ $monsterSearchButton?.addEventListener('click', () => {
   viewSwap('monster-view');
 });
 
+$monsterSearchButton2?.addEventListener('click', () => {
+  viewSwap('monster-view');
+});
+
 $homeButton?.addEventListener('click', () => {
   viewSwap('home-view');
 });
 
 $spellSearchButton?.addEventListener('click', () => {
+  viewSwap('spell-view');
+});
+
+$spellSearchButton2?.addEventListener('click', () => {
   viewSwap('spell-view');
 });
 
@@ -402,6 +417,10 @@ function renderSpell(spellData: SpellInformation): HTMLDivElement {
   $spellTitle.textContent = spellData.name;
 
   $divSpell?.append($spellTitle);
+
+  const $addSpellButton = document.createElement('i');
+  $addSpellButton.setAttribute('class', 'fas fa-plus-circle');
+  $spellTitle.append($addSpellButton);
 
   const $spellSchoolLevelDivContainer = document.createElement('div');
   $spellSchoolLevelDivContainer.classList.add('row');

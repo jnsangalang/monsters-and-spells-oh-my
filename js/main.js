@@ -13,6 +13,10 @@ const $submitSpellButton = document.querySelector('.submit-spell-button');
 const $spellFormInput = document.querySelector('#spell-form-input');
 const $divSpell = document.querySelector('#spell-information');
 const $spellListButton = document.querySelector('.spell-list-button');
+const $monsterSearchButton2 = document.querySelector(
+  '.monster-search-button-2',
+);
+const $spellSearchButton2 = document.querySelector('.spell-search-button-2');
 const domQueries = {
   $formInput,
   $monsterInput,
@@ -27,6 +31,8 @@ const domQueries = {
   $submitSpellButton,
   $spellFormInput,
   $spellListButton,
+  $monsterSearchButton2,
+  $spellSearchButton2,
 };
 for (const key in domQueries) {
   if (!domQueries[key]) throw new Error(`The ${key} dom query failed `);
@@ -34,10 +40,16 @@ for (const key in domQueries) {
 $monsterSearchButton?.addEventListener('click', () => {
   viewSwap('monster-view');
 });
+$monsterSearchButton2?.addEventListener('click', () => {
+  viewSwap('monster-view');
+});
 $homeButton?.addEventListener('click', () => {
   viewSwap('home-view');
 });
 $spellSearchButton?.addEventListener('click', () => {
+  viewSwap('spell-view');
+});
+$spellSearchButton2?.addEventListener('click', () => {
   viewSwap('spell-view');
 });
 $spellListButton?.addEventListener('click', () => {
@@ -266,6 +278,9 @@ function renderSpell(spellData) {
   $spellTitle.classList.add('title-name');
   $spellTitle.textContent = spellData.name;
   $divSpell?.append($spellTitle);
+  const $addSpellButton = document.createElement('i');
+  $addSpellButton.setAttribute('class', 'fas fa-plus-circle');
+  $spellTitle.append($addSpellButton);
   const $spellSchoolLevelDivContainer = document.createElement('div');
   $spellSchoolLevelDivContainer.classList.add('row');
   $spellTitle.append($spellSchoolLevelDivContainer);

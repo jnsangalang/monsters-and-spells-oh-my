@@ -1,20 +1,12 @@
-.add-spell-button {
-  position: absolute;
-  background: transparent;
-  border: none;
-  left: 87%;
-  font-size: 2rem;
-}
-
 body {
   background-color: rgb(120, 0, 58);
   margin: 0 3rem;
 }
 
-.image {
-  width: 100%;
-  margin-top: 10rem;
-  margin-bottom: 6rem;
+.fa-plus-circle {
+  float: right;
+  font-size: 2rem;
+  cursor: pointer;
 }
 
 header {
@@ -38,6 +30,12 @@ header {
 
 .home-button-container {
   text-align: right;
+}
+
+.image {
+  width: 100%;
+  margin-top: 10rem;
+  margin-bottom: 6rem;
 }
 
 .monster-container,
@@ -87,6 +85,18 @@ header {
   font-family: 'Dancing Script', sans-serif;
   font-size: 2rem;
   font-weight: 700;
+}
+
+.monster-search-button-2,
+.spell-search-button-2 {
+  background-color: rgb(255, 184, 0);
+  border: none;
+  border-radius: 3rem;
+  padding: 1.5rem 4rem;
+  font-family: 'Dancing Script', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 4rem 0;
 }
 
 p {
