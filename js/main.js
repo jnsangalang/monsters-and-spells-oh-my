@@ -8,6 +8,10 @@ const $monsterInformation = document.querySelector('.monster-information');
 const $submitMonsterButton = document.querySelector('.submit-monster-button');
 const $divMonster = document.querySelector('#monster-information');
 const $spellSearchButton = document.querySelector('.spell-search-button');
+const $spellInformation = document.querySelector('.spell-information');
+const $submitSpellButton = document.querySelector('.submit-spell-button');
+const $spellFormInput = document.querySelector('#spell-form-input');
+const $divSpell = document.querySelector('#spell-information');
 const domQueries = {
   $formInput,
   $monsterInput,
@@ -18,6 +22,9 @@ const domQueries = {
   $submitMonsterButton,
   $divMonster,
   $spellSearchButton,
+  $spellInformation,
+  $submitSpellButton,
+  $spellFormInput,
 };
 for (const key in domQueries) {
   if (!domQueries[key]) throw new Error(`The ${key} dom query failed `);
@@ -204,4 +211,205 @@ function renderMonster(monsterData) {
     $monsterSpecialAbilitiesHeader.append($monsterParagraph);
   }
   return $divMonster;
+}
+// async function to retrieve spell information from API
+async function retrieveSpellInformation(spellName) {
+  try {
+    const response = await fetch('https://www.dnd5eapi.co/api/spells');
+    $spellInformation.textContent = 'Looking up...';
+    const responseSpells = await response.json();
+    const spellsInfo = responseSpells.results;
+    if (!response.ok) {
+      const message = `Failed to get spells, Error ${response.status}`;
+      $spellInformation.textContent = 'Error retrieving spell data';
+      throw new Error(message);
+    }
+    for (let i = 0; i < spellsInfo.length; i++) {
+      if (spellsInfo[i].name.toLowerCase() === spellName.toLowerCase()) {
+        const response = await fetch(
+          `https://www.dnd5eapi.co${spellsInfo[i].url}`,
+        );
+        const matchSpellResponse = await response.json();
+        const spellData = matchSpellResponse;
+        $spellInformation.textContent = '';
+        renderSpell(spellData);
+        return;
+      } else if (spellsInfo[i].name.toLowerCase() !== spellName.toLowerCase()) {
+        $spellInformation.textContent = 'Spell not found';
+      }
+    }
+  } catch (error) {
+    $spellInformation.textContent = 'Error retrieving spell data';
+  }
+}
+// add eventlistener for spell submit button to call async retrieve spell information
+$submitSpellButton?.addEventListener('click', (event) => {
+  event.preventDefault();
+  const $spellFormElement = $spellFormInput.elements;
+  const spellName = {
+    name: $spellFormElement.spellName.value,
+  };
+  if (spellName.name) {
+    retrieveSpellInformation(spellName.name);
+  } else {
+    $spellInformation.textContent = 'Please use a spell name';
+  }
+});
+// Function to render spell htmlelements with information
+function renderSpell(spellData) {
+  const $spellTitle = document.createElement('h1');
+  $spellTitle.classList.add('title-name');
+  $spellTitle.textContent = spellData.name;
+  $divSpell?.append($spellTitle);
+  const $spellSchoolLevelDivContainer = document.createElement('div');
+  $spellSchoolLevelDivContainer.classList.add('row');
+  $spellTitle.append($spellSchoolLevelDivContainer);
+  const $spellSchoolHeader = document.createElement('h2');
+  $spellSchoolHeader.classList.add('column-half');
+  $spellSchoolHeader.classList.add('spell-header');
+  $spellSchoolHeader.textContent = 'School';
+  $spellSchoolLevelDivContainer?.append($spellSchoolHeader);
+  const $spellLevelHeader = document.createElement('h2');
+  $spellLevelHeader.classList.add('column-half');
+  $spellLevelHeader.classList.add('spell-header');
+  $spellLevelHeader.textContent = 'Level';
+  $spellSchoolLevelDivContainer?.append($spellLevelHeader);
+  const $spellRangeCastTimeDivContainer = document.createElement('div');
+  $spellRangeCastTimeDivContainer.classList.add('row');
+  $spellTitle.append($spellRangeCastTimeDivContainer);
+  const $spellRangeHeader = document.createElement('h2');
+  $spellRangeHeader.classList.add('column-half');
+  $spellRangeHeader.classList.add('spell-header');
+  $spellRangeHeader.textContent = 'Range';
+  $spellRangeCastTimeDivContainer?.append($spellRangeHeader);
+  const $spellCastTimeHeader = document.createElement('h2');
+  $spellCastTimeHeader.classList.add('column-half');
+  $spellCastTimeHeader.classList.add('spell-header');
+  $spellCastTimeHeader.textContent = 'Cast Time';
+  $spellRangeCastTimeDivContainer?.append($spellCastTimeHeader);
+  const $spellDurationConcentrationDivContainer = document.createElement('div');
+  $spellDurationConcentrationDivContainer.classList.add('row');
+  $spellTitle.append($spellDurationConcentrationDivContainer);
+  const $spellConcentrationHeader = document.createElement('h2');
+  $spellConcentrationHeader.classList.add('column-half');
+  $spellConcentrationHeader.classList.add('spell-header');
+  $spellConcentrationHeader.textContent = 'Concentration';
+  $spellDurationConcentrationDivContainer?.append($spellConcentrationHeader);
+  const $spellDurationHeader = document.createElement('h2');
+  $spellDurationHeader.classList.add('column-half');
+  $spellDurationHeader.classList.add('spell-header');
+  $spellDurationHeader.textContent = 'Duration';
+  $spellDurationConcentrationDivContainer?.append($spellDurationHeader);
+  const $spellDescriptionDivContainer = document.createElement('div');
+  $spellDescriptionDivContainer.classList.add('row');
+  $spellTitle.append($spellDescriptionDivContainer);
+  const $spellDamageOrHealDivContainer = document.createElement('div');
+  $spellDescriptionDivContainer.classList.add('row');
+  $spellTitle.append($spellDamageOrHealDivContainer);
+  const $spellDescHeader = document.createElement('h2');
+  $spellDescHeader.classList.add('row');
+  $spellDescHeader.textContent = 'Description';
+  $spellDescriptionDivContainer?.append($spellDescHeader);
+  // Spell level information
+  const $spellLevel = document.createElement('p');
+  $spellLevel.classList.add('spell-text-information');
+  const spellInformation = {};
+  // Introduce variable that will change as it pushes information to spellInformation object
+  const currentSpellInformation = spellData.level;
+  const spellLevel = currentSpellInformation;
+  spellInformation.level = spellLevel;
+  $spellLevel.textContent = spellInformation.level;
+  $spellLevelHeader.append($spellLevel);
+  // Spell school information
+  const $spellSchoolInformation = document.createElement('p');
+  $spellSchoolInformation.classList.add('spell-text-information');
+  const spellSchoolInformation = spellData.school.name.toString();
+  const spellSchool = spellSchoolInformation;
+  spellInformation.school = spellSchool;
+  $spellSchoolInformation.textContent = spellInformation.school;
+  $spellSchoolHeader.append($spellSchoolInformation);
+  // Spell range information
+  const $spellRangeInformation = document.createElement('p');
+  $spellRangeInformation.classList.add('spell-text-information');
+  const spellRangeInformation = spellData.range;
+  const spellRange = spellRangeInformation;
+  spellInformation.range = spellRange;
+  $spellRangeInformation.textContent = spellInformation.range;
+  $spellRangeHeader.append($spellRangeInformation);
+  // Spell cast time information
+  const $spellCastTimeInformation = document.createElement('p');
+  $spellCastTimeInformation.classList.add('spell-text-information');
+  const spellCastTimeInformation = spellData.casting_time;
+  const spellCastTime = spellCastTimeInformation;
+  spellInformation.castTime = spellCastTime;
+  $spellCastTimeInformation.textContent = spellInformation.castTime;
+  $spellCastTimeHeader.append($spellCastTimeInformation);
+  // Spell concentration
+  const $spellConcentrationInformation = document.createElement('p');
+  $spellConcentrationInformation.classList.add('spell-text-information');
+  const spellConcentrationInformation = spellData.concentration;
+  const spellConcentration = spellConcentrationInformation;
+  spellInformation.concentration = spellConcentration;
+  $spellConcentrationInformation.textContent =
+    spellInformation.concentration.toString();
+  $spellConcentrationHeader.append($spellConcentrationInformation);
+  // Spell duration
+  const $spellDurationInformation = document.createElement('p');
+  $spellDurationInformation.classList.add('spell-text-information');
+  const spellDurationInformation = spellData.duration;
+  const spellDuration = spellDurationInformation;
+  spellInformation.duration = spellDuration;
+  $spellDurationInformation.textContent = spellInformation.duration;
+  $spellDurationHeader.append($spellDurationInformation);
+  // description of spells
+  for (let i = 0; i < spellData.desc.length; i++) {
+    const $spellDescriptionInformation = document.createElement('p');
+    $spellDescriptionInformation.classList.add('spell-text-information');
+    spellInformation.desc = spellData.desc[i];
+    $spellDescriptionInformation.textContent = spellInformation.desc;
+    $spellDescHeader.append($spellDescriptionInformation);
+  }
+  const $spellDamageInformation = document.createElement('p');
+  $spellDamageInformation.classList.add('spell-text-information');
+  // damage of spells
+  if (spellData?.damage?.damage_at_slot_level !== undefined) {
+    const $spellDamageHeader = document.createElement('h2');
+    $spellDamageHeader.classList.add('row');
+    $spellDamageHeader.textContent = 'Damage';
+    $spellDamageOrHealDivContainer?.append($spellDamageHeader);
+  }
+  if (spellData?.damage?.damage_at_slot_level !== undefined) {
+    spellInformation.damage = spellData.damage?.damage_at_slot_level;
+    let currentDamage = '';
+    for (const [key, value] of Object.entries(spellInformation.damage)) {
+      const $spellDamageInformation = document.createElement('p');
+      $spellDamageInformation.classList.add('spell-text-information');
+      $spellDamageInformation.classList.add('spell-damage-text');
+      currentDamage = 'Level ' + key + ': ' + value;
+      $spellDamageInformation.textContent = currentDamage;
+      $spellDamageOrHealDivContainer.append($spellDamageInformation);
+    }
+  }
+  // healing of spells
+  if (spellData?.heal_at_slot_level !== undefined) {
+    const $spellHealHeader = document.createElement('h2');
+    $spellHealHeader.classList.add('row');
+    $spellHealHeader.textContent = 'Heal';
+    $spellDamageOrHealDivContainer?.append($spellHealHeader);
+  }
+  if (spellData?.heal_at_slot_level !== undefined) {
+    spellInformation.heal_at_slot_level = spellData.heal_at_slot_level;
+    let currentHeal = '';
+    for (const [key, value] of Object.entries(
+      spellInformation.heal_at_slot_level,
+    )) {
+      const $spellHealInformation = document.createElement('p');
+      $spellHealInformation.classList.add('spell-text-information');
+      $spellHealInformation.classList.add('spell-heal-text');
+      currentHeal = 'Level ' + key + ': ' + value;
+      $spellHealInformation.textContent = currentHeal;
+      $spellDamageOrHealDivContainer.append($spellHealInformation);
+    }
+  }
+  return $divSpell;
 }

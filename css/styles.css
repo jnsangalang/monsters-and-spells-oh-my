@@ -9,14 +9,20 @@ body {
   margin-bottom: 6rem;
 }
 
+header {
+  margin-top: 1rem;
+}
+
 .how-to {
   float: left;
+  font-family: 'Oleo Script', sans-serif;
 }
 
 .home-button {
   background-color: rgb(240, 239, 235);
   border: none;
   border-radius: 3rem;
+  cursor: pointer;
   font-family: 'Dancing Script', sans-serif;
   font-size: 1rem;
   font-weight: 700;
@@ -26,7 +32,8 @@ body {
   text-align: right;
 }
 
-.monster-container {
+.monster-container,
+.spell-container {
   background-color: rgb(255, 184, 0);
   margin-top: 4rem;
   border-radius: 3rem;
@@ -37,7 +44,8 @@ body {
   width: 50%;
 }
 
-.monster-input {
+.monster-input,
+.spell-input {
   border: none;
   border-radius: 3rem;
   font-family: 'Dancing Script', sans-serif;
@@ -47,7 +55,8 @@ body {
   padding: 1.5rem 0.5rem;
 }
 
-.monster-information {
+.monster-information,
+.spell-information {
   width: 100%;
   text-align: center;
   font-family: 'Oleo Script', sans-serif;
@@ -74,7 +83,17 @@ p {
   text-align: left;
 }
 
-.submit-monster-button {
+.spell-damage-text,
+.spell-heal-text {
+  color: rgb(120, 0, 58);
+}
+
+.spell-header {
+  line-height: 0.2rem;
+}
+
+.submit-monster-button,
+.submit-spell-button {
   background-color: transparent;
   border: none;
   border-radius: 100rem;
@@ -97,4 +116,9 @@ h1 {
 h2 > .monster-text-information {
   color: rgb(120, 0, 58);
   padding: 1 rem;
+}
+
+h2 > .spell-text-information {
+  text-align: center;
+  color: rgb(120, 0, 58);
 }

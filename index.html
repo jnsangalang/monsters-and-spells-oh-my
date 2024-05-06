@@ -21,6 +21,7 @@
       rel="stylesheet" />
   </head>
   <body>
+    <header><button type="button" class="home-button">HOME</button></header>
     <main>
       <div data-view="home-view" class="view">
         <div class="container">
@@ -47,19 +48,14 @@
         </div>
       </div>
       <div data-view="monster-view" class="view hidden">
-        <div class="home-button-container">
-          <div class="row">
-            <button type="button" class="home-button">HOME</button>
-          </div>
-        </div>
         <div class="container monster-container">
           <div class="row">
             <div class="column-full">
               <h2 class="how-to">How to:</h2>
             </div>
-            <div class="column-full">
+            <div class="how-to column-full">
               <p>
-                Monster Search:Within the search bar, type the name of the
+                Monster Search: Within the search bar, type the name of the
                 monster you wish to look up. Followed by clicking on the D20
                 submit button.
               </p>
@@ -89,37 +85,40 @@
         </div>
       </div>
       <div data-view="spell-view" class="view hidden">
-        <div class="home-button-container">
-          <div class="row">
-            <button type="button" class="home-button">HOME</button>
-          </div>
-        </div>
         <div class="spell-container">
           <div class="row">
             <div class="column-full">
               <h2 class="how-to">How to:</h2>
             </div>
-            <div class="column-full">
+            <div class="how-to column-full">
               <p>
-                Spell Search:Within the search bar, type the name of the monster
-                you wish to look up. Followed by clicking on the D20 submit
-                button.
+                Spell Search: Within the search bar, type the name of the
+                monster you wish to look up. Followed by clicking on the D20
+                submit button.
               </p>
             </div>
           </div>
-          <form id="spell-form-input">
-            <div class="row">
+        </div>
+        <form id="spell-form-input">
+          <div class="row">
+            <div class="column-half-button search-bar">
               <input
-                id="spell-name"
+                id="spellName"
                 class="spell-input"
                 type="text"
                 placeholder="Spell name..." />
+            </div>
+            <div class="column-half-button">
               <button class="submit-spell-button">
-                <i class="fa-solid fa-dice-d20"></i> SUBMIT MONSTER
+                <i class="fa-solid fa-dice-d20"></i>
               </button>
             </div>
-          </form>
-          <div id="spell-information" class="spell-information"></div>
+          </div>
+        </form>
+        <div class="container spell-container">
+          <div id="spell-information" class="spell-information container">
+            <textarea rows="30" disabled></textarea>
+          </div>
         </div>
       </div>
     </main>
