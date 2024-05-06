@@ -28,7 +28,6 @@ interface MonsterInformation {
 interface SpellName {
   name: string;
 }
-
 interface SpellInformation {
   name: string;
   range: string;
@@ -63,7 +62,6 @@ interface SpellInformation {
     9?: string;
   };
 }
-
 const $formInput = document.querySelector('#form-input') as HTMLFormElement;
 const $monsterInput = document.querySelector(
   '.monster-input',
