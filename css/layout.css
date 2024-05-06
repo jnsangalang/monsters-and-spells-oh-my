@@ -20,13 +20,16 @@
   justify-content: center;
 }
 
+.row-search {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: space-evenly;
+}
+
 .column-full,
 .column-half {
   width: 100%;
-}
-
-.column-half-button {
-  width: 50%;
 }
 
 @media screen and (width >= 768px) {
@@ -38,15 +41,30 @@
     width: 50%;
   }
 
+  .column-third-button {
+    width: calc(100% / 3);
+  }
+
   .fa-solid {
     font-size: 5rem;
   }
 
-  .home-button{
-font-size: 4rem;
-}
+  .home-button {
+    font-size: 4rem;
+  }
 
   .spell-search-button {
     margin-bottom: 6rem;
+  }
+
+  .submit-monster-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 100rem;
+    cursor: pointer;
+    font-size: 2rem;
+    margin-top: 1rem;
+    padding-left: 3rem;
+    padding-top: 3rem;
   }
 }

@@ -89,7 +89,7 @@ const $spellFormInput = document.querySelector(
 const $divSpell = document.querySelector(
   '#spell-information',
 ) as HTMLDivElement;
-
+const $spellListButton = document.querySelector('.spell-list-button');
 const domQueries: Record<string, any> = {
   $formInput,
   $monsterInput,
@@ -103,6 +103,7 @@ const domQueries: Record<string, any> = {
   $spellInformation,
   $submitSpellButton,
   $spellFormInput,
+  $spellListButton,
 };
 
 for (const key in domQueries) {

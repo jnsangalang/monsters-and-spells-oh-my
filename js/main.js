@@ -12,6 +12,7 @@ const $spellInformation = document.querySelector('.spell-information');
 const $submitSpellButton = document.querySelector('.submit-spell-button');
 const $spellFormInput = document.querySelector('#spell-form-input');
 const $divSpell = document.querySelector('#spell-information');
+const $spellListButton = document.querySelector('.spell-list-button');
 const domQueries = {
   $formInput,
   $monsterInput,
@@ -25,6 +26,7 @@ const domQueries = {
   $spellInformation,
   $submitSpellButton,
   $spellFormInput,
+  $spellListButton,
 };
 for (const key in domQueries) {
   if (!domQueries[key]) throw new Error(`The ${key} dom query failed `);
