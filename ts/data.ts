@@ -1,10 +1,12 @@
 /* exported data */
 interface Data {
-  list:SpellInformation[],
-  nextSpellId:number
+  spellList:SpellInformation[],
+  nextSpellId:number,
+  spellEdit: null | SpellInformation,
 };
 
 let data: Data = {
-  list:[],
-  nextSpellId:1
+  spellList:[],
+  nextSpellId:1,
+  spellEdit:null,
 };

@@ -27,6 +27,7 @@ interface MonsterInformation {
 
 interface SpellName {
   name: string;
+  spellId:number
 }
 interface SpellInformation {
   name: string;
@@ -61,6 +62,8 @@ interface SpellInformation {
     8?: string;
     9?: string;
   };
+  spellId:number;
+
 }
 const $formInput = document.querySelector('#form-input') as HTMLFormElement;
 const $monsterInput = document.querySelector(
@@ -401,11 +404,18 @@ $submitSpellButton?.addEventListener('click', (event: Event) => {
 
   const spellName: SpellName = {
     name: $spellFormElement.spellName.value,
+    spellId:data.nextSpellId
   };
+
+
 
   if (spellName.name) {
     retrieveSpellInformation(spellName.name);
-  } else {
+    data.nextSpellId++;
+  }
+
+
+  else {
     $spellInformation.textContent = 'Please use a spell name';
   }
 });
@@ -416,6 +426,13 @@ function renderSpell(spellData: SpellInformation): HTMLDivElement {
   $spellTitle.classList.add('title-name');
   $spellTitle.textContent = spellData.name;
 
+  let spellList = [];
+  if(data.spellEdit){
+    $divSpell.dataset.spellId = data.spellEdit.spellId.toString();
+  }
+  if(!data.spellEdit){
+    $divSpell.dataset.spellId = data.nextSpellId.toString();
+  }
   $divSpell?.append($spellTitle);
 
   const $addSpellButton = document.createElement('i');
@@ -483,11 +500,14 @@ function renderSpell(spellData: SpellInformation): HTMLDivElement {
   $spellDescHeader.textContent = 'Description';
   $spellDescriptionDivContainer?.append($spellDescHeader);
 
+
   // Spell level information
   const $spellLevel = document.createElement('p');
   $spellLevel.classList.add('spell-text-information');
 
   const spellInformation: any = {};
+
+  spellInformation.spellId = data.nextSpellId;
 
   // Introduce variable that will change as it pushes information to spellInformation object
   const currentSpellInformation = spellData.level;
@@ -615,5 +635,24 @@ function renderSpell(spellData: SpellInformation): HTMLDivElement {
       $spellDamageOrHealDivContainer.append($spellHealInformation);
     }
   }
-  return $divSpell;
+  spellList.unshift(spellInformation);
+  console.log(spellInformation);
+  console.log(spellList);
+
+
+  return spellInformation;
 }
+
+$divSpell.addEventListener('click',(event:Event)=>{
+  const $eventTarget = event.target as HTMLElement;
+  const $addIcon = $eventTarget.tagName;
+  const $dataSpellId = $eventTarget.closest('div')?.getAttribute('data-spell-id');
+  viewSwap('spell-list-view');
+
+  // if($addIcon === 'I'){
+  //   if(data.spellEdit===null){
+  //     data.spellList.unshift(spellInformation);
+  //   }
+  //   }
+console.log(data.spellList);
+})

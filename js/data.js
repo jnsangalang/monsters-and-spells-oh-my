@@ -1,6 +1,7 @@
 "use strict";
 ;
 let data = {
-    list: [],
-    nextSpellId: 1
+    spellList: [],
+    nextSpellId: 1,
+    spellEdit: null,
 };

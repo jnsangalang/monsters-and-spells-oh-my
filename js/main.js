@@ -259,9 +259,11 @@ $submitSpellButton?.addEventListener('click', (event) => {
     const $spellFormElement = $spellFormInput.elements;
     const spellName = {
         name: $spellFormElement.spellName.value,
+        spellId: data.nextSpellId
     };
     if (spellName.name) {
         retrieveSpellInformation(spellName.name);
+        data.nextSpellId++;
     }
     else {
         $spellInformation.textContent = 'Please use a spell name';
@@ -272,6 +274,13 @@ function renderSpell(spellData) {
     const $spellTitle = document.createElement('h1');
     $spellTitle.classList.add('title-name');
     $spellTitle.textContent = spellData.name;
+    let spellList = [];
+    if (data.spellEdit) {
+        $divSpell.dataset.spellId = data.spellEdit.spellId.toString();
+    }
+    if (!data.spellEdit) {
+        $divSpell.dataset.spellId = data.nextSpellId.toString();
+    }
     $divSpell?.append($spellTitle);
     const $addSpellButton = document.createElement('i');
     $addSpellButton.setAttribute('class', 'fas fa-plus-circle');
@@ -329,6 +338,7 @@ function renderSpell(spellData) {
     const $spellLevel = document.createElement('p');
     $spellLevel.classList.add('spell-text-information');
     const spellInformation = {};
+    spellInformation.spellId = data.nextSpellId;
     // Introduce variable that will change as it pushes information to spellInformation object
     const currentSpellInformation = spellData.level;
     const spellLevel = currentSpellInformation;
@@ -424,5 +434,20 @@ function renderSpell(spellData) {
             $spellDamageOrHealDivContainer.append($spellHealInformation);
         }
     }
-    return $divSpell;
+    spellList.unshift(spellInformation);
+    console.log(spellInformation);
+    console.log(spellList);
+    return spellInformation;
 }
+$divSpell.addEventListener('click', (event) => {
+    const $eventTarget = event.target;
+    const $addIcon = $eventTarget.tagName;
+    const $dataSpellId = $eventTarget.closest('div')?.getAttribute('data-spell-id');
+    viewSwap('spell-list-view');
+    // if($addIcon === 'I'){
+    //   if(data.spellEdit===null){
+    //     data.spellList.unshift(spellInformation);
+    //   }
+    //   }
+    console.log(data.spellList);
+});
