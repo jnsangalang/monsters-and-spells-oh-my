@@ -63,7 +63,7 @@
           </div>
         </div>
         <form id="form-input">
-          <div class="row">
+          <div class="row-search">
             <div class="column-half-button search-bar">
               <input
                 id="name"
@@ -86,7 +86,7 @@
       </div>
       <div data-view="spell-view" class="view hidden">
         <div class="spell-container">
-          <div class="row">
+          <div class="row-search">
             <div class="column-full">
               <h2 class="how-to">How to:</h2>
             </div>
@@ -100,17 +100,22 @@
           </div>
         </div>
         <form id="spell-form-input">
-          <div class="row">
-            <div class="column-half-button search-bar">
+          <div class="row-search">
+            <div class="column-half-button column-third-button search-bar">
               <input
                 id="spellName"
                 class="spell-input"
                 type="text"
                 placeholder="Spell name..." />
             </div>
-            <div class="column-half-button">
+            <div class="column-half-button column-third-button">
               <button class="submit-spell-button">
                 <i class="fa-solid fa-dice-d20"></i>
+              </button>
+            </div>
+            <div class="column-third-button">
+              <button type="button" class="spell-list-button">
+                View Spell List
               </button>
             </div>
           </div>
@@ -119,6 +124,24 @@
           <div id="spell-information" class="spell-information container">
             <textarea rows="30" disabled></textarea>
           </div>
+        </div>
+      </div>
+      <div data-view="spell-list-view" class="view hidden">
+        <div class="row">
+          <div class="column-half">
+            <button type="button" class="monster-search-button">
+              Monster Search
+            </button>
+          </div>
+          <div class="column-half">
+            <button type="button" class="spell-search-button">
+              Create Spell List
+            </button>
+          </div>
+        </div>
+        <div class="spell-list-header">
+          <h1 class="spell-list-header">Spell List</h1>
+          <div class="row spell-list"></div>
         </div>
       </div>
     </main>
