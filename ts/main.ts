@@ -36,6 +36,7 @@ interface SpellObj {
   range: string;
   duration: string;
   desc: [];
+  spellId: number;
 }
 interface SpellInformation {
   name: string;
@@ -644,7 +645,6 @@ function renderSpell(spellData: SpellInformation): HTMLDivElement {
   return spellInformation;
 }
 
-// event listener for clicking on 'plus' icon to add spell to list of spells user can refer to
 const $spellMainDivContainer = document.createElement('div');
 $spellMainDivContainer.classList.add('spell-list-container');
 $spellList?.append($spellMainDivContainer);
@@ -653,6 +653,9 @@ const $spellContainerRow = document.createElement('div');
 $spellContainerRow.classList.add('row-spell');
 
 $spellMainDivContainer.append($spellContainerRow);
+
+// event listener for clicking on 'plus' icon to add spell to list of spells user can refer to
+
 $divSpell.addEventListener('click', (event: Event) => {
   const $eventTarget = event.target as HTMLElement;
   const $addIcon = $eventTarget.tagName;
@@ -670,15 +673,19 @@ $divSpell.addEventListener('click', (event: Event) => {
     range: '',
     duration: '',
     desc: [],
+    spellId: 0,
   };
-
   if ($addIcon === 'I') {
     for (let i = 0; i < data.spellList.length; i++) {
       if ($dataSpellId === data.spellList[i].spellId.toString()) {
         const $spellContainer = document.createElement('div');
         $spellContainer.classList.add('column-third');
         $spellContainer.classList.add('spell-item-background');
-        $spellContainerRow.append($spellContainer);
+        $spellContainerRow.prepend($spellContainer);
+
+        $spellContainer.setAttribute('id', data.nextSpellId.toString());
+
+        spellObj.spellId = data.nextSpellId;
 
         // minus icon
         const $minusIcon = document.createElement('i');
@@ -722,10 +729,13 @@ $divSpell.addEventListener('click', (event: Event) => {
         spellObj.desc = data.spellList[i].desc;
 
         data.actualSpellList.unshift(spellObj);
+        console.log(data.actualSpellList);
       }
     }
   }
 });
+console.log(data.actualSpellList);
+console.log(data.spellList);
 
 document.addEventListener('DOMContentLoaded', () => {
   for (let i = 0; i < data.actualSpellList.length; i++) {
@@ -735,9 +745,15 @@ document.addEventListener('DOMContentLoaded', () => {
       $spellContainer.classList.add('spell-item-background');
       $spellContainerRow.append($spellContainer);
 
+      $spellContainer.setAttribute(
+        'id',
+        data.actualSpellList[i].spellId.toString(),
+      );
+
       // minus icon
       const $minusIcon = document.createElement('i');
       $minusIcon.setAttribute('class', 'fa-solid fa-circle-minus');
+      $minusIcon.setAttribute('name', 'minus-button');
       $spellContainer.append($minusIcon);
 
       const $spellName = document.createElement('h1');
@@ -767,6 +783,24 @@ document.addEventListener('DOMContentLoaded', () => {
       $spellDescription.textContent = data.actualSpellList[i].desc.toString();
       $spellDescription.classList.add('spell-list-information');
       $spellContainer.append($spellDescription);
+    }
+  }
+});
+
+// add event listener for 'minus' button to delete spell
+
+$spellMainDivContainer.addEventListener('click', (event: Event) => {
+  const $eventTarget = event.target as HTMLElement;
+  const $minusIcon = $eventTarget.tagName;
+  const $currentSpellId = $eventTarget.closest('div')?.getAttribute('id');
+  if ($minusIcon === 'I') {
+    for (let i = 0; i < data.actualSpellList.length; i++) {
+      if ($currentSpellId === data.actualSpellList[i].spellId.toString()) {
+        const removeDiv = document.getElementById(
+          data.actualSpellList[i].spellId.toString(),
+        );
+        removeDiv?.remove();
+      }
     }
   }
 });

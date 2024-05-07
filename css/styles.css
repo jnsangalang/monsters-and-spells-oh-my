@@ -6,6 +6,7 @@ body {
 .fa-circle-minus {
   float: right;
   color: rgb(0, 0, 0);
+  cursor: pointer;
 }
 
 .fa-plus-circle {

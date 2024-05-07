@@ -2,7 +2,7 @@
 let data = {
   spellList: [],
   actualSpellList: [],
-  nextSpellId: 1,
+  nextSpellId: 0,
   spellEdit: null,
 };
 const $retrievedSpellList = document.querySelector('.retrieved-spell-list');
