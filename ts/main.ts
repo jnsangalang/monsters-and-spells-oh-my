@@ -104,6 +104,7 @@ const $monsterSearchButton2 = document.querySelector(
 );
 const $spellSearchButton2 = document.querySelector('.spell-search-button-2');
 const $spellList = document.querySelector('.spell-list');
+const $noSpells = document.querySelector('.no-spells');
 
 const domQueries: Record<string, any> = {
   $formInput,
@@ -122,6 +123,7 @@ const domQueries: Record<string, any> = {
   $monsterSearchButton2,
   $spellSearchButton2,
   $spellList,
+  $noSpells,
 };
 
 for (const key in domQueries) {
@@ -175,6 +177,7 @@ function viewSwap(string: string): void {
     } else {
       $view[i].classList.add('hidden');
     }
+    toggleNoSpells();
   }
 }
 // async to get monster information from API
@@ -730,6 +733,7 @@ $divSpell.addEventListener('click', (event: Event) => {
 
         data.actualSpellList.unshift(spellObj);
         console.log(data.actualSpellList);
+        toggleNoSpells();
       }
     }
   }
@@ -785,10 +789,26 @@ document.addEventListener('DOMContentLoaded', () => {
       $spellContainer.append($spellDescription);
     }
   }
+  if (data.actualSpellList.length > 0) {
+    toggleNoSpells();
+  }
 });
 
-// add event listener for 'minus' button to delete spell
+function toggleNoSpells(): void {
+  if (
+    $noSpells?.classList.contains('no-spells') &&
+    data.actualSpellList.length > 0
+  ) {
+    $noSpells.classList.add('hidden');
+  } else if (
+    $noSpells?.classList.contains('no-spells') &&
+    data.actualSpellList === null
+  ) {
+    $noSpells.classList.remove('hidden');
+  }
+}
 
+// add event listener for 'minus' button to delete spell
 $spellMainDivContainer.addEventListener('click', (event: Event) => {
   const $eventTarget = event.target as HTMLElement;
   const $minusIcon = $eventTarget.tagName;
@@ -800,6 +820,12 @@ $spellMainDivContainer.addEventListener('click', (event: Event) => {
           data.actualSpellList[i].spellId.toString(),
         );
         removeDiv?.remove();
+        toggleNoSpells();
+      }
+    }
+    for (let i = 0; i < data.actualSpellList.length; i++) {
+      if ($currentSpellId === data.actualSpellList[i].spellId.toString()) {
+        data.actualSpellList.splice(i, 1);
       }
     }
   }

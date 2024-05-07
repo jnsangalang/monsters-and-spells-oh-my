@@ -18,6 +18,7 @@ const $monsterSearchButton2 = document.querySelector(
 );
 const $spellSearchButton2 = document.querySelector('.spell-search-button-2');
 const $spellList = document.querySelector('.spell-list');
+const $noSpells = document.querySelector('.no-spells');
 const domQueries = {
   $formInput,
   $monsterInput,
@@ -35,6 +36,7 @@ const domQueries = {
   $monsterSearchButton2,
   $spellSearchButton2,
   $spellList,
+  $noSpells,
 };
 for (const key in domQueries) {
   if (!domQueries[key]) throw new Error(`The ${key} dom query failed `);
@@ -77,6 +79,7 @@ function viewSwap(string) {
     } else {
       $view[i].classList.add('hidden');
     }
+    toggleNoSpells();
   }
 }
 // async to get monster information from API
@@ -461,7 +464,7 @@ $divSpell.addEventListener('click', (event) => {
     ?.getAttribute('data-spell-id');
   viewSwap('spell-list-view');
   // new spell obj with spell information that gets pushed into array
-  let spellObj = {
+  const spellObj = {
     name: '',
     level: 1,
     range: '',
@@ -516,6 +519,7 @@ $divSpell.addEventListener('click', (event) => {
         spellObj.desc = data.spellList[i].desc;
         data.actualSpellList.unshift(spellObj);
         console.log(data.actualSpellList);
+        toggleNoSpells();
       }
     }
   }
@@ -563,8 +567,24 @@ document.addEventListener('DOMContentLoaded', () => {
       $spellContainer.append($spellDescription);
     }
   }
+  if (data.actualSpellList.length > 0) {
+    toggleNoSpells();
+  }
 });
-//add event listener for 'minus' button to delete spell
+function toggleNoSpells() {
+  if (
+    $noSpells?.classList.contains('no-spells') &&
+    data.actualSpellList.length > 0
+  ) {
+    $noSpells.classList.add('hidden');
+  } else if (
+    $noSpells?.classList.contains('no-spells') &&
+    data.actualSpellList === null
+  ) {
+    $noSpells.classList.remove('hidden');
+  }
+}
+// add event listener for 'minus' button to delete spell
 $spellMainDivContainer.addEventListener('click', (event) => {
   const $eventTarget = event.target;
   const $minusIcon = $eventTarget.tagName;
@@ -576,6 +596,12 @@ $spellMainDivContainer.addEventListener('click', (event) => {
           data.actualSpellList[i].spellId.toString(),
         );
         removeDiv?.remove();
+        toggleNoSpells();
+      }
+    }
+    for (let i = 0; i < data.actualSpellList.length; i++) {
+      if ($currentSpellId === data.actualSpellList[i].spellId.toString()) {
+        data.actualSpellList.splice(i, 1);
       }
     }
   }
