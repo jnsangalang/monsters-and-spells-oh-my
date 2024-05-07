@@ -105,6 +105,13 @@ header {
   margin: 4rem 0;
 }
 
+.no-spells {
+  font-size: 5rem;
+  color: rgb(240, 239, 235);
+  text-align: center;
+  width: 100%;
+}
+
 p {
   text-align: left;
 }
