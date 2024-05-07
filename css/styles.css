@@ -117,6 +117,11 @@ p {
   line-height: 0.2rem;
 }
 
+.spell-item-background {
+  background-color: rgb(240, 239, 235);
+  height: 100%;
+}
+
 .spell-list-button {
   background-color: rgb(240, 239, 235);
   border: none;
@@ -130,7 +135,7 @@ p {
 }
 
 .spell-list-container {
-  background-color: rgb(240, 239, 235);
+  /* background-color: rgb(240, 239, 235); */
   width: 100%;
   margin: 5rem;
 }
@@ -148,6 +153,7 @@ p {
   font-family: 'Oleo Script', sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
+  gap: 40rem;
 }
 
 .submit-monster-button,
