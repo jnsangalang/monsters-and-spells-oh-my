@@ -13,6 +13,12 @@
   align-items: center;
 }
 
+.row-spell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
 .row-monster {
   display: flex;
   flex-wrap: wrap;
@@ -28,7 +34,8 @@
 }
 
 .column-full,
-.column-half {
+.column-half,
+.column-third {
   width: 100%;
 }
 
@@ -45,16 +52,20 @@
     width: calc(100% / 3);
   }
 
-  .fa-solid {
-    font-size: 5rem;
+  .column-third {
+    width: calc(100% / 3.2);
+  }
+
+  .fa-circle-minus {
+    font-size: 1rem;
   }
 
   .home-button {
     font-size: 4rem;
   }
 
-  .monster-search-button,
-  .spell-search-button {
+  .monster-search-button-2,
+  .spell-search-button-2 {
     margin-top: 5rem;
   }
 
