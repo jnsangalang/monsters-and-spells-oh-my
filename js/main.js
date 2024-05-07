@@ -445,10 +445,9 @@ function renderSpell(spellData) {
     }
   }
   data.spellList.unshift(spellInformation);
-  console.log('search spell list', data.spellList);
-  console.log($divSpell);
   return spellInformation;
 }
+//event listener for clicking on 'plus' icon to add spell to list of spells user can refer to
 $divSpell.addEventListener('click', (event) => {
   const $eventTarget = event.target;
   const $addIcon = $eventTarget.tagName;
@@ -456,6 +455,7 @@ $divSpell.addEventListener('click', (event) => {
     .closest('div')
     ?.getAttribute('data-spell-id');
   viewSwap('spell-list-view');
+  //new spell obj with spell information that gets pushed into array
   const spellObj = {
     name: '',
     level: 1,
@@ -475,38 +475,43 @@ $divSpell.addEventListener('click', (event) => {
         const $spellContainer = document.createElement('div');
         $spellContainer.classList.add('column-full');
         $spellContainerRow.append($spellContainer);
+        //spell name
         const $spellName = document.createElement('h1');
         $spellName.textContent = data.spellList[i].name;
         $spellName.classList.add('spell-list-information');
         $spellContainer.append($spellName);
         $spellContainer?.append($spellName);
         spellObj.name = data.spellList[i].name;
+        //minus incon
         const $minusIcon = document.createElement('i');
         $minusIcon.setAttribute('class', 'fa-solid fa-circle-minus');
         $spellMainDivContainer.append($minusIcon);
+        //spell level
         const $spellLevel = document.createElement('p');
         $spellLevel.textContent =
           'Level: ' + data.spellList[i].level.toString();
         $spellLevel.classList.add('spell-list-information');
         $spellContainer.append($spellLevel);
         spellObj.level = data.spellList[i].level;
+        //spell range
         const $spellRange = document.createElement('p');
         $spellRange.textContent = 'Range:' + data.spellList[i].range;
         $spellRange.classList.add('spell-list-information');
         $spellContainer.append($spellRange);
         spellObj.range = data.spellList[i].range;
+        //spell duration
         const $spellDuration = document.createElement('p');
         $spellDuration.textContent = 'Duration: ' + data.spellList[i].duration;
         $spellDuration.classList.add('spell-list-information');
         $spellContainer.append($spellDuration);
         spellObj.duration = data.spellList[i].duration;
+        //spell description
         const $spellDescription = document.createElement('p');
         $spellDescription.textContent = data.spellList[i].desc.toString();
         $spellDescription.classList.add('spell-list-information');
         $spellContainer.append($spellDescription);
         spellObj.desc = data.spellList[i].desc;
         data.actualSpellList.unshift(spellObj);
-        console.log('actual list', data.actualSpellList);
       }
     }
   }
