@@ -434,8 +434,7 @@ function renderSpell(spellData: SpellInformation): HTMLDivElement {
 
   if (data.spellEdit) {
     $divSpell.dataset.spellId = data.spellEdit.spellId.toString();
-  }
-  if (!data.spellEdit) {
+  } else {
     $divSpell.dataset.spellId = data.nextSpellId.toString();
   }
   $divSpell?.append($spellTitle);
@@ -731,47 +730,43 @@ $divSpell.addEventListener('click', (event: Event) => {
 document.addEventListener('DOMContentLoaded', () => {
   for (let i = 0; i < data.actualSpellList.length; i++) {
     if (data.actualSpellList[i] !== null) {
-      if (previousDataJSON !== null) {
-        data = JSON.parse(previousDataJSON);
+      const $spellContainer = document.createElement('div');
+      $spellContainer.classList.add('column-third');
+      $spellContainer.classList.add('spell-item-background');
+      $spellContainerRow.append($spellContainer);
 
-        const $spellContainer = document.createElement('div');
-        $spellContainer.classList.add('column-third');
-        $spellContainer.classList.add('spell-item-background');
-        $spellContainerRow.append($spellContainer);
+      // minus icon
+      const $minusIcon = document.createElement('i');
+      $minusIcon.setAttribute('class', 'fa-solid fa-circle-minus');
+      $spellContainer.append($minusIcon);
 
-        // minus icon
-        const $minusIcon = document.createElement('i');
-        $minusIcon.setAttribute('class', 'fa-solid fa-circle-minus');
-        $spellContainer.append($minusIcon);
+      const $spellName = document.createElement('h1');
+      $spellName.textContent = data.actualSpellList[i].name;
+      $spellName.classList.add('spell-list-information');
+      $spellContainer.append($spellName);
+      $spellContainer?.append($spellName);
 
-        const $spellName = document.createElement('h1');
-        $spellName.textContent = data.actualSpellList[i].name;
-        $spellName.classList.add('spell-list-information');
-        $spellContainer.append($spellName);
-        $spellContainer?.append($spellName);
+      const $spellLevel = document.createElement('p');
+      $spellLevel.textContent =
+        'Level: ' + data.actualSpellList[i].level.toString();
+      $spellLevel.classList.add('spell-list-information');
+      $spellContainer.append($spellLevel);
 
-        const $spellLevel = document.createElement('p');
-        $spellLevel.textContent =
-          'Level: ' + data.actualSpellList[i].level.toString();
-        $spellLevel.classList.add('spell-list-information');
-        $spellContainer.append($spellLevel);
+      const $spellRange = document.createElement('p');
+      $spellRange.textContent = 'Range:' + data.actualSpellList[i].range;
+      $spellRange.classList.add('spell-list-information');
+      $spellContainer.append($spellRange);
 
-        const $spellRange = document.createElement('p');
-        $spellRange.textContent = 'Range:' + data.actualSpellList[i].range;
-        $spellRange.classList.add('spell-list-information');
-        $spellContainer.append($spellRange);
+      const $spellDuration = document.createElement('p');
+      $spellDuration.textContent =
+        'Duration: ' + data.actualSpellList[i].duration;
+      $spellDuration.classList.add('spell-list-information');
+      $spellContainer.append($spellDuration);
 
-        const $spellDuration = document.createElement('p');
-        $spellDuration.textContent =
-          'Duration: ' + data.actualSpellList[i].duration;
-        $spellDuration.classList.add('spell-list-information');
-        $spellContainer.append($spellDuration);
-
-        const $spellDescription = document.createElement('p');
-        $spellDescription.textContent = data.actualSpellList[i].desc.toString();
-        $spellDescription.classList.add('spell-list-information');
-        $spellContainer.append($spellDescription);
-      }
+      const $spellDescription = document.createElement('p');
+      $spellDescription.textContent = data.actualSpellList[i].desc.toString();
+      $spellDescription.classList.add('spell-list-information');
+      $spellContainer.append($spellDescription);
     }
   }
 });
