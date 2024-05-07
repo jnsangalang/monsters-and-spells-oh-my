@@ -19,6 +19,9 @@ if (previousDataJSON !== null) {
     const $spellMainDivContainer = document.createElement('div');
     $spellMainDivContainer.classList.add('spell-list-container');
     $retrievedSpellList?.append($spellMainDivContainer);
+    const $minusIcon = document.createElement('i');
+    $minusIcon.setAttribute('class', 'fa-solid fa-circle-minus');
+    $spellMainDivContainer.append($minusIcon);
     const $spellContainerRow = document.createElement('div');
     $spellContainerRow.classList.add('row');
     $spellMainDivContainer.append($spellContainerRow);

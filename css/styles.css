@@ -3,6 +3,11 @@ body {
   margin: 0 3rem;
 }
 
+.fa-circle-minus {
+  float: right;
+  color: rgb(0, 0, 0);
+}
+
 .fa-plus-circle {
   float: right;
   font-size: 2rem;
@@ -124,10 +129,10 @@ p {
   text-align: center;
 }
 
-.spell-list-container{
+.spell-list-container {
   background-color: rgb(240, 239, 235);
-  width:100%;
-  margin:5rem;
+  width: 100%;
+  margin: 5rem;
 }
 
 .spell-list-header {
@@ -135,8 +140,9 @@ p {
   font-family: 'Dancing Script', sans-serif;
 }
 
-.spell-list-information{
-  background-color:rgb(240, 239, 235);
+.spell-list-information {
+  background-color: rgb(240, 239, 235);
+  color: rgb(0, 0, 0);
   width: 100%;
   text-align: center;
   font-family: 'Oleo Script', sans-serif;

@@ -456,7 +456,13 @@ $divSpell.addEventListener('click', (event) => {
     .closest('div')
     ?.getAttribute('data-spell-id');
   viewSwap('spell-list-view');
-  let spellObj = { name: '', level: 1, range: '', duration: '', desc: [] };
+  const spellObj = {
+    name: '',
+    level: 1,
+    range: '',
+    duration: '',
+    desc: [],
+  };
   if ($addIcon === 'I') {
     for (let i = 0; i < data.spellList.length; i++) {
       if ($dataSpellId === data.spellList[i].spellId.toString()) {
@@ -475,6 +481,9 @@ $divSpell.addEventListener('click', (event) => {
         $spellContainer.append($spellName);
         $spellContainer?.append($spellName);
         spellObj.name = data.spellList[i].name;
+        const $minusIcon = document.createElement('i');
+        $minusIcon.setAttribute('class', 'fa-solid fa-circle-minus');
+        $spellMainDivContainer.append($minusIcon);
         const $spellLevel = document.createElement('p');
         $spellLevel.textContent =
           'Level: ' + data.spellList[i].level.toString();

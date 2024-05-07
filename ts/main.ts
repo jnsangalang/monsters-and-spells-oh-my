@@ -686,6 +686,10 @@ $divSpell.addEventListener('click', (event: Event) => {
         $spellContainer?.append($spellName);
         spellObj.name = data.spellList[i].name;
 
+        const $minusIcon = document.createElement('i');
+        $minusIcon.setAttribute('class', 'fa-solid fa-circle-minus');
+        $spellMainDivContainer.append($minusIcon);
+
         const $spellLevel = document.createElement('p');
         $spellLevel.textContent =
           'Level: ' + data.spellList[i].level.toString();
