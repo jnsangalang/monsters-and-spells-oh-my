@@ -16,10 +16,7 @@
 .row-spell {
   display: flex;
   flex-wrap: wrap;
-  text-align: center;
-  align-items: center;
   gap: 1rem;
-  width: 100%;
 }
 
 .row-monster {
