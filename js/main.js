@@ -518,14 +518,11 @@ $divSpell.addEventListener('click', (event) => {
         $spellContainer.append($spellDescription);
         spellObj.desc = data.spellList[i].desc;
         data.actualSpellList.unshift(spellObj);
-        console.log(data.actualSpellList);
         toggleNoSpells();
       }
     }
   }
 });
-console.log(data.actualSpellList);
-console.log(data.spellList);
 document.addEventListener('DOMContentLoaded', () => {
   for (let i = 0; i < data.actualSpellList.length; i++) {
     if (data.actualSpellList[i] !== null) {
@@ -579,7 +576,7 @@ function toggleNoSpells() {
     $noSpells.classList.add('hidden');
   } else if (
     $noSpells?.classList.contains('no-spells') &&
-    data.actualSpellList === null
+    data.actualSpellList.length === 0
   ) {
     $noSpells.classList.remove('hidden');
   }
@@ -596,7 +593,6 @@ $spellMainDivContainer.addEventListener('click', (event) => {
           data.actualSpellList[i].spellId.toString(),
         );
         removeDiv?.remove();
-        toggleNoSpells();
       }
     }
     for (let i = 0; i < data.actualSpellList.length; i++) {
@@ -604,5 +600,8 @@ $spellMainDivContainer.addEventListener('click', (event) => {
         data.actualSpellList.splice(i, 1);
       }
     }
+  }
+  if (data.actualSpellList.length === 0) {
+    toggleNoSpells();
   }
 });
