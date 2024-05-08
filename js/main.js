@@ -18,6 +18,7 @@ const $monsterSearchButton2 = document.querySelector(
 );
 const $spellSearchButton2 = document.querySelector('.spell-search-button-2');
 const $spellList = document.querySelector('.spell-list');
+const $noSpells = document.querySelector('.no-spells');
 const domQueries = {
   $formInput,
   $monsterInput,
@@ -35,6 +36,7 @@ const domQueries = {
   $monsterSearchButton2,
   $spellSearchButton2,
   $spellList,
+  $noSpells,
 };
 for (const key in domQueries) {
   if (!domQueries[key]) throw new Error(`The ${key} dom query failed `);
@@ -77,6 +79,7 @@ function viewSwap(string) {
     } else {
       $view[i].classList.add('hidden');
     }
+    toggleNoSpells();
   }
 }
 // async to get monster information from API
@@ -446,13 +449,13 @@ function renderSpell(spellData) {
   data.spellList.unshift(spellInformation);
   return spellInformation;
 }
-// event listener for clicking on 'plus' icon to add spell to list of spells user can refer to
 const $spellMainDivContainer = document.createElement('div');
 $spellMainDivContainer.classList.add('spell-list-container');
 $spellList?.append($spellMainDivContainer);
 const $spellContainerRow = document.createElement('div');
 $spellContainerRow.classList.add('row-spell');
 $spellMainDivContainer.append($spellContainerRow);
+// event listener for clicking on 'plus' icon to add spell to list of spells user can refer to
 $divSpell.addEventListener('click', (event) => {
   const $eventTarget = event.target;
   const $addIcon = $eventTarget.tagName;
@@ -467,6 +470,7 @@ $divSpell.addEventListener('click', (event) => {
     range: '',
     duration: '',
     desc: [],
+    spellId: 0,
   };
   if ($addIcon === 'I') {
     for (let i = 0; i < data.spellList.length; i++) {
@@ -474,7 +478,9 @@ $divSpell.addEventListener('click', (event) => {
         const $spellContainer = document.createElement('div');
         $spellContainer.classList.add('column-third');
         $spellContainer.classList.add('spell-item-background');
-        $spellContainerRow.append($spellContainer);
+        $spellContainerRow.prepend($spellContainer);
+        $spellContainer.setAttribute('id', data.nextSpellId.toString());
+        spellObj.spellId = data.nextSpellId;
         // minus icon
         const $minusIcon = document.createElement('i');
         $minusIcon.setAttribute('class', 'fa-solid fa-circle-minus');
@@ -512,6 +518,7 @@ $divSpell.addEventListener('click', (event) => {
         $spellContainer.append($spellDescription);
         spellObj.desc = data.spellList[i].desc;
         data.actualSpellList.unshift(spellObj);
+        toggleNoSpells();
       }
     }
   }
@@ -523,9 +530,14 @@ document.addEventListener('DOMContentLoaded', () => {
       $spellContainer.classList.add('column-third');
       $spellContainer.classList.add('spell-item-background');
       $spellContainerRow.append($spellContainer);
+      $spellContainer.setAttribute(
+        'id',
+        data.actualSpellList[i].spellId.toString(),
+      );
       // minus icon
       const $minusIcon = document.createElement('i');
       $minusIcon.setAttribute('class', 'fa-solid fa-circle-minus');
+      $minusIcon.setAttribute('name', 'minus-button');
       $spellContainer.append($minusIcon);
       const $spellName = document.createElement('h1');
       $spellName.textContent = data.actualSpellList[i].name;
@@ -551,5 +563,45 @@ document.addEventListener('DOMContentLoaded', () => {
       $spellDescription.classList.add('spell-list-information');
       $spellContainer.append($spellDescription);
     }
+  }
+  if (data.actualSpellList.length > 0) {
+    toggleNoSpells();
+  }
+});
+function toggleNoSpells() {
+  if (
+    $noSpells?.classList.contains('no-spells') &&
+    data.actualSpellList.length > 0
+  ) {
+    $noSpells.classList.add('hidden');
+  } else if (
+    $noSpells?.classList.contains('no-spells') &&
+    data.actualSpellList.length === 0
+  ) {
+    $noSpells.classList.remove('hidden');
+  }
+}
+// add event listener for 'minus' button to delete spell
+$spellMainDivContainer.addEventListener('click', (event) => {
+  const $eventTarget = event.target;
+  const $minusIcon = $eventTarget.tagName;
+  const $currentSpellId = $eventTarget.closest('div')?.getAttribute('id');
+  if ($minusIcon === 'I') {
+    for (let i = 0; i < data.actualSpellList.length; i++) {
+      if ($currentSpellId === data.actualSpellList[i].spellId.toString()) {
+        const removeDiv = document.getElementById(
+          data.actualSpellList[i].spellId.toString(),
+        );
+        removeDiv?.remove();
+      }
+    }
+    for (let i = 0; i < data.actualSpellList.length; i++) {
+      if ($currentSpellId === data.actualSpellList[i].spellId.toString()) {
+        data.actualSpellList.splice(i, 1);
+      }
+    }
+  }
+  if (data.actualSpellList.length === 0) {
+    toggleNoSpells();
   }
 });

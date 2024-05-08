@@ -9,7 +9,7 @@ interface Data {
 let data: Data = {
   spellList: [],
   actualSpellList: [],
-  nextSpellId: 1,
+  nextSpellId: 0,
   spellEdit: null,
 };
 

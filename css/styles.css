@@ -6,6 +6,7 @@ body {
 .fa-circle-minus {
   float: right;
   color: rgb(0, 0, 0);
+  cursor: pointer;
 }
 
 .fa-plus-circle {
@@ -102,6 +103,13 @@ header {
   font-size: 2rem;
   font-weight: 700;
   margin: 4rem 0;
+}
+
+.no-spells {
+  font-size: 5rem;
+  color: rgb(240, 239, 235);
+  text-align: center;
+  width: 100%;
 }
 
 p {
