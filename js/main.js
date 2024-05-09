@@ -67,6 +67,7 @@ $submitMonsterButton?.addEventListener('click', (event) => {
   };
   if (monsterName.name) {
     retrieveMonsterInformation(monsterName.name);
+    $formInput.reset();
   } else {
     $monsterInformation.textContent = 'Please use a monster name';
   }
@@ -276,6 +277,7 @@ $submitSpellButton?.addEventListener('click', (event) => {
   if (spellName.name) {
     retrieveSpellInformation(spellName.name);
     data.nextSpellId++;
+    $spellFormInput.reset();
   } else {
     $spellInformation.textContent = 'Please use a spell name';
   }

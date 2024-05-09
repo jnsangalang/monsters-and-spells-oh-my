@@ -1,41 +1,82 @@
 body {
-  background-color: rgb(120, 0, 58);
-  margin: 0 3rem;
+  background: linear-gradient(
+    178deg,
+    #f7e8cb 0%,
+    #fce494 38%,
+    #7d5b36 76%,
+    #5b5228 100%
+  );
+  padding-bottom: 20rem;
+  margin: 10rem 3rem;
+}
+
+.dnd-logo {
+  width: 25%;
+  height: 25%;
 }
 
 .fa-circle-minus {
   float: right;
-  color: rgb(0, 0, 0);
+  color: rgb(97, 7, 27);
   cursor: pointer;
+  display: inline-block;
+  mask: linear-gradient(-60deg, #000 30%, #0005, #000 70%) right/300% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 2.5s infinite;
 }
 
 .fa-plus-circle {
   float: right;
   font-size: 2rem;
+  color: rgb(255, 255, 255);
   cursor: pointer;
+  display: inline-block;
+  mask: linear-gradient(-60deg, #000 30%, #0005, #000 70%) right/300% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 2.5s infinite;
 }
 
-header {
-  margin-top: 1rem;
+@keyframes shimmer {
+  100% {
+    mask-position: left;
+  }
 }
 
 .how-to {
+  color: rgb(240, 239, 235);
   float: left;
   font-family: 'Oleo Script', sans-serif;
 }
 
 .home-button {
-  background-color: rgb(240, 239, 235);
+  background: none;
   border: none;
-  border-radius: 3rem;
   cursor: pointer;
-  font-family: 'Dancing Script', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
 }
 
 .home-button-container {
   text-align: right;
+}
+
+.home-view {
+  background:
+    radial-gradient(
+        circle at 0% 50%,
+        rgba(255, 8, 107, 0) 9px,
+        rgb(216, 184, 112) 10px,
+        rgba(96, 16, 48, 0) 11px
+      )
+      0 10px,
+    radial-gradient(
+      at 100% 100%,
+      rgba(96, 16, 48, 0) 9px,
+      rgb(216, 184, 112) 10px,
+      rgba(96, 16, 48, 0) 11px
+    ),
+    rgb(97, 7, 27);
+  background-size: 20px 20px;
+  margin-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .image {
@@ -46,7 +87,8 @@ header {
 
 .monster-container,
 .spell-container {
-  background-color: rgb(255, 184, 0);
+  background-color: rgb(97, 7, 27);
+  color: rgb(240, 239, 235);
   margin-top: 4rem;
   border-radius: 3rem;
   padding: 0.5rem;
@@ -84,7 +126,11 @@ header {
 
 .monster-search-button,
 .spell-search-button {
-  background-color: rgb(255, 184, 0);
+  background-color: rgb(216, 184, 112);
+  display: inline-block;
+  mask: linear-gradient(-60deg, #000 30%, #0005, #000 70%) right/300% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 2s infinite;
   border: none;
   border-radius: 3rem;
   padding: 1.5rem 4rem;
@@ -95,7 +141,11 @@ header {
 
 .monster-search-button-2,
 .spell-search-button-2 {
-  background-color: rgb(255, 184, 0);
+  background-color: rgb(216, 184, 112);
+  display: inline-block;
+  mask: linear-gradient(-60deg, #000 30%, #0005, #000 70%) right/300% 100%;
+  background-repeat: no-repeat;
+  animation: shimmer 2s infinite;
   border: none;
   border-radius: 3rem;
   padding: 1.5rem 4rem;
@@ -116,13 +166,41 @@ p {
   text-align: left;
 }
 
+.spell-container {
+  background-color: black;
+  background-image: radial-gradient(
+      white,
+      rgba(255, 255, 255, 0.2) 2px,
+      transparent 40px
+    ),
+    radial-gradient(white, rgba(255, 255, 255, 0.15) 1px, transparent 30px),
+    radial-gradient(white, rgba(255, 255, 255, 0.1) 2px, transparent 40px),
+    radial-gradient(
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.1) 2px,
+      transparent 30px
+    );
+  background-size:
+    550px 550px,
+    350px 350px,
+    250px 250px,
+    150px 150px;
+  background-position:
+    0 0,
+    40px 60px,
+    130px 270px,
+    70px 100px;
+}
+
 .spell-damage-text,
 .spell-heal-text {
-  color: rgb(120, 0, 58);
+  color: rgb(240, 239, 235);
+  font-size: 1rem;
 }
 
 .spell-header {
   line-height: 0.2rem;
+  color: rgb(216, 184, 112);
 }
 
 .spell-item-background {
@@ -148,8 +226,9 @@ p {
 }
 
 .spell-list-header {
-  color: rgb(255, 184, 0);
+  color: rgb(97, 7, 27);
   font-family: 'Dancing Script', sans-serif;
+  font-size: 4rem;
 }
 
 .spell-list-information {
@@ -175,20 +254,34 @@ p {
 }
 
 textarea {
-  background-color: rgb(255, 184, 0);
+  background-color: transparent;
   border: none;
+}
+
+.title-name {
+  color: rgb(216, 184, 112);
 }
 
 h1 {
   color: rgb(0, 0, 0);
 }
 
+h2 {
+  color: rgb(216, 184, 112);
+  font-size: 1.5rem;
+}
+
 h2 > .monster-text-information {
-  color: rgb(120, 0, 58);
+  color: rgb(240, 239, 235);
   padding: 1 rem;
 }
 
 h2 > .spell-text-information {
+  font-size: 1rem;
   text-align: center;
-  color: rgb(120, 0, 58);
+  color: rgb(240, 239, 235);
+}
+
+div > .row {
+  color: rgb(216, 184, 112);
 }
