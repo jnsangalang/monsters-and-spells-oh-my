@@ -86,8 +86,8 @@ function viewSwap(string) {
 // async to get monster information from API
 async function retrieveMonsterInformation(monsterName) {
   try {
-    const response = await fetch('https://www.dnd5eapi.co/api/monsters');
     $monsterInformation.textContent = 'Looking up...';
+    const response = await fetch('https://www.dnd5eapi.co/api/monsters');
     const responseMonsters = await response.json();
     const monstersInfo = responseMonsters.results;
     if (!response.ok) {
